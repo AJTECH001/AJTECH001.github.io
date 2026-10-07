@@ -1,0 +1,499 @@
+/* Work-only document styles. Shared colors, fonts and controls come from globals.css. */
+.work-page {
+  padding-block: 1.5rem 4rem;
+}
+.work-breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+.work-breadcrumb a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+.work-breadcrumb a:hover {
+  color: var(--accent);
+}
+.work-breadcrumb [aria-current] {
+  color: var(--foreground);
+}
+.work-page-header {
+  padding-block: 2.5rem 3rem;
+  max-width: 900px;
+}
+.work-page-header h1 {
+  font-size: clamp(2.1rem, 4.5vw, 3.7rem);
+  line-height: 1.12;
+  margin-block: 1rem 1.5rem;
+  text-wrap: balance;
+}
+.work-page-header > p:not(.eyebrow) {
+  max-width: 72ch;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+.work-page-header .accent {
+  color: var(--accent);
+}
+.archive-register {
+  border-block: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 1rem;
+}
+.archive-register h2 {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+}
+.archive-entry {
+  display: grid;
+  grid-template-columns: 11rem minmax(0, 1fr);
+  gap: 2rem;
+  padding-block: 2.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.archive-number {
+  color: var(--accent);
+  padding-top: 0.45rem;
+}
+.archive-number span {
+  display: block;
+  font-size: 2.5rem;
+  letter-spacing: -0.05em;
+  margin-top: 0.6rem;
+  font-weight: 400;
+}
+.archive-content h2 {
+  font-size: clamp(1.5rem, 2.8vw, 2.15rem);
+}
+.archive-content h2 a {
+  text-decoration: none;
+}
+.archive-content h2 a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+.archive-content h2 a > span {
+  font-size: 1rem;
+  color: var(--accent);
+}
+.archive-description {
+  max-width: 68ch;
+  margin-top: 1rem;
+  color: var(--muted);
+}
+.work-metadata {
+  display: grid;
+  grid-template-columns: max-content 1fr max-content minmax(0, 2fr);
+  gap: 1rem 2rem;
+  margin-block: 1.5rem;
+}
+.work-metadata > div {
+  min-width: 0;
+}
+.work-metadata dt {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
+}
+.work-metadata dd {
+  font-size: 0.8rem;
+}
+.work-technologies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 0.8rem;
+}
+.work-technologies li {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.7rem;
+}
+.archive-footnote {
+  padding-block: 1.5rem 0.75rem;
+  max-width: 80ch;
+}
+.archive-empty {
+  padding-block: 2rem;
+}
+.record-intro {
+  max-width: none;
+}
+.record-intro > h1 {
+  max-width: 22ch;
+}
+.record-intro > p:not(.eyebrow) {
+  max-width: 76ch;
+}
+.record-intro .work-metadata {
+  margin: 2rem 0 0;
+  padding-block: 1.25rem;
+  border-block: 1px solid var(--border);
+  grid-template-columns: max-content max-content max-content minmax(0, 1fr);
+  column-gap: 3rem;
+}
+.record-document {
+  display: grid;
+  grid-template-columns: 13rem minmax(0, 1fr);
+  gap: 3rem;
+  align-items: start;
+}
+.record-toc {
+  position: sticky;
+  top: 1.5rem;
+  max-height: calc(100dvh - 3rem);
+  overflow-y: auto;
+  padding: 0.4rem;
+  margin: -0.4rem;
+}
+.record-toc ol {
+  margin-top: 0.75rem;
+}
+.record-toc li a {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  padding-block: 0.7rem;
+  min-height: 44px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-decoration: none;
+}
+.record-toc li a span {
+  color: var(--accent);
+  font-size: 0.6rem;
+}
+.record-toc li a:hover {
+  color: var(--foreground);
+  text-decoration: underline;
+}
+.record-toc > .text-link {
+  margin-top: 0.75rem;
+  border-top: 1px solid var(--border);
+  padding-top: 0.75rem;
+}
+.record-body {
+  min-width: 0;
+}
+.record-section {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 2.5rem;
+  margin-bottom: 2.5rem;
+  scroll-margin-top: 2rem;
+}
+.record-section-title {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+.record-section-title h2,
+.record-section > h2 {
+  font-size: 1.65rem;
+}
+.record-section > p {
+  color: var(--muted);
+  max-width: 76ch;
+}
+.record-section > p + p {
+  margin-top: 1rem;
+}
+.record-points {
+  list-style: square;
+  padding-left: 1.2rem;
+  margin: 0;
+  max-width: 76ch;
+  color: var(--muted);
+}
+.record-points li + li {
+  margin-top: 0.8rem;
+}
+.record-points li::marker {
+  color: var(--accent);
+}
+.record-diagram {
+  margin: 1.5rem 0 0;
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  background: var(--surface);
+}
+.record-diagram figcaption {
+  margin: 0;
+}
+.record-diagram figcaption > p {
+  margin-block: 0.65rem 0.4rem;
+  font-size: 1rem;
+}
+.record-diagram figcaption > .muted {
+  display: block;
+  font-size: 0.8rem;
+}
+.diagram-nodes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+.diagram-nodes li {
+  border-top: 1px solid var(--accent);
+  padding-top: 0.75rem;
+}
+.diagram-nodes p {
+  font-size: 0.9rem;
+  margin-block: 0.4rem;
+}
+.diagram-nodes .technical {
+  overflow-wrap: anywhere;
+}
+.diagram-connections {
+  border-top: 1px solid var(--border);
+  margin-top: 1.5rem;
+  padding-top: 0.5rem;
+}
+.diagram-connections li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem 1rem;
+  flex-wrap: wrap;
+  padding-block: 0.65rem;
+  font-size: 0.75rem;
+}
+.diagram-connections li > span:first-child {
+  color: var(--foreground);
+}
+.diagram-connections li > span:first-child > span[aria-hidden] {
+  color: var(--accent);
+  padding-inline: 0.3rem;
+}
+.record-roadmap {
+  margin: 1.5rem 0 0;
+}
+.record-roadmap > div {
+  display: grid;
+  grid-template-columns: 5rem minmax(0, 1fr);
+  gap: 1rem;
+  padding-block: 1rem;
+  border-top: 1px solid var(--border);
+}
+.record-roadmap dt {
+  color: var(--accent);
+}
+.record-roadmap dd {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.record-reference-links {
+  margin-top: 1rem;
+}
+.record-reference-links li {
+  display: flex;
+  gap: 1rem;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+.record-end {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+@media (max-width: 1050px) {
+  .archive-entry {
+    grid-template-columns: 8rem minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+  .work-metadata {
+    grid-template-columns: max-content 1fr max-content;
+    gap: 1rem 1.5rem;
+  }
+  .work-metadata > div:last-child {
+    grid-column: 1 / -1;
+  }
+  .record-intro .work-metadata {
+    grid-template-columns: max-content 1fr max-content;
+    gap: 1rem 1.5rem;
+  }
+  .record-document {
+    grid-template-columns: 11rem minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+}
+@media (max-width: 800px) {
+  .record-document {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .record-toc {
+    position: static;
+    max-height: none;
+    overflow: visible;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.5rem;
+  }
+  .record-toc ol {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1.5rem;
+  }
+  .record-toc > .text-link {
+    border: 0;
+    padding-top: 0;
+  }
+}
+@media (max-width: 600px) {
+  .work-page {
+    padding-top: 0.75rem;
+    padding-bottom: 2rem;
+  }
+  .work-page-header {
+    padding-block: 1.75rem 2rem;
+  }
+  .work-page-header > p:not(.eyebrow) {
+    font-size: 0.95rem;
+  }
+  .archive-entry {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding-block: 1.75rem;
+  }
+  .archive-number {
+    display: flex;
+    gap: 0.7rem;
+    align-items: baseline;
+  }
+  .archive-number span {
+    font-size: 0.9rem;
+    letter-spacing: 0;
+    margin: 0;
+  }
+  .work-metadata,
+  .record-intro .work-metadata {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .work-metadata > div:last-child {
+    grid-column: auto;
+  }
+  .archive-register {
+    gap: 0.5rem;
+  }
+  .archive-register > p {
+    font-size: 0.65rem;
+  }
+  .record-intro > h1 {
+    font-size: clamp(2rem, 7.5vw, 2.8rem);
+  }
+  .record-toc li a {
+    gap: 0.5rem;
+    font-size: 0.75rem;
+  }
+  .record-toc ol {
+    gap: 0 0.75rem;
+  }
+  .record-section {
+    padding-bottom: 1.75rem;
+    margin-bottom: 1.75rem;
+  }
+  .record-section-title {
+    gap: 0.75rem;
+  }
+  .record-section-title h2,
+  .record-section > h2 {
+    font-size: 1.4rem;
+  }
+  .record-section > p,
+  .record-points {
+    font-size: 0.95rem;
+  }
+  .record-diagram {
+    padding: 1rem;
+  }
+  .diagram-nodes {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .diagram-nodes li {
+    display: grid;
+    grid-template-columns: 1.5rem minmax(0, 1fr);
+    column-gap: 0.5rem;
+    padding-top: 0.5rem;
+  }
+  .diagram-nodes p {
+    margin: 0;
+  }
+  .diagram-nodes li > span:last-child {
+    grid-column: 2;
+    margin-top: 0.3rem;
+  }
+  .diagram-connections li {
+    display: grid;
+    gap: 0.25rem;
+  }
+  .record-roadmap > div {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+}
+
+.record-learning {
+  border-bottom: 1px solid var(--border);
+  padding-block: 0.5rem 1.5rem;
+  margin-top: 1.25rem;
+}
+.record-learning h2 {
+  font-size: 1.15rem;
+  margin-bottom: 1rem;
+}
+.record-learning .record-points {
+  font-size: 0.9rem;
+}
+.debugging-case {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.debugging-case h3 {
+  font-size: 1.1rem;
+  margin-bottom: 1.25rem;
+}
+.debugging-case dl {
+  margin: 0;
+}
+.debugging-case dl > div {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+  gap: 1rem;
+  padding-block: 1rem;
+  border-top: 1px solid var(--border);
+}
+.debugging-case dt {
+  color: var(--accent);
+}
+.debugging-case dd {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.debugging-source {
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+  margin-top: 0.5rem;
+  font-size: 0.65rem;
+}
+@media (max-width: 600px) {
+  .debugging-case {
+    padding: 1rem;
+  }
+  .debugging-case dl > div {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+}
