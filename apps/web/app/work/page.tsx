@@ -3,9 +3,9 @@ import { WorkIndex } from "@/components/work/work-index";
 import { getProjects } from "@/lib/projects";
 
 export const metadata: Metadata = {
-  title: "Engineering records — ajtech",
+  title: "Projects — AJTECH",
   description:
-    "An archive of engineering work: problems, architecture, implementation, and the decisions behind each project.",
+    "Projects with documented scope, implementation, engineering decisions, and current status.",
 };
 export default async function WorkPage() {
   return <WorkIndex projects={await getProjects()} />;

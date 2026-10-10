@@ -20,16 +20,16 @@ export function ResearchIndex({
   return (
     <div className="shell research-page">
       <header className="research-intro">
-        <p className="eyebrow accent">Systems / Infrastructure / Protocols</p>
-        <h1>Research lab</h1>
+        <p className="eyebrow accent">Writing / Research outlines</p>
+        <h1>Research topics in progress</h1>
         <p>
-          Technical questions and learning directions under investigation. These
-          records distinguish open research from validated work and operational
-          experience.
+          These records set out technical questions and learning scope. They are
+          early outlines: no validated findings, completed studies, or
+          operational experience are claimed.
         </p>
         <p className="technical muted research-count">
-          {String(records.length).padStart(2, "0")} public research records /
-          questions remain open
+          {String(records.length).padStart(2, "0")} ongoing outlines · no
+          published findings
         </p>
       </header>
       <div className="research-groups">

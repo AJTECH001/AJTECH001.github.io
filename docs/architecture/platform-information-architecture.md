@@ -1,20 +1,21 @@
-# Personal technology headquarters: information architecture
+# AJTECH engineering portfolio: information architecture
 
-Status: structural plan and route reservations. No additional feature pages,
-backend, authentication, telemetry, database, AI, or deployment are implemented by
-this milestone. The refined homepage and engineering archive remain intact.
+Status: the route and data contracts below include future reservations. They are
+not evidence that a backend, authentication, telemetry, database, AI service, or
+self-hosted deployment exists. The public frontend remains on Vercel.
 
 ## 1. Existing foundation and decisions
 
 - One Next.js App Router application in `apps/web`, within the current pnpm workspace.
-- Root layout owns the skip link, header, main landmark, and footer. Work owns its document stylesheet and nested layout.
-- `/`, `/work`, and `/work/[slug]` exist. Project 001 is the only published engineering record.
-- `getProjects` and `getProjectBySlug` supply typed records to Server Components. Homepage previews share that record.
+- Root layout owns the skip link, header, main landmark, and footer.
+- `/`, `/about`, `/work`, `/work/[slug]`, `/writing`, `/journal`, `/journal/[slug]`, `/research`, and `/research/[slug]` are implemented.
+- Project 001 is the only published project. One published engineering log and six research outlines are also available as local content.
+- `getProjects` and `getProjectBySlug` supply typed records to Server Components. The homepage and project archive use the same project record.
 - Preserve the modular monolith, workspace, lockfiles, validation scripts, current layouts and visual tokens.
 - Reserve unfinished routes in `platform-routes.ts`, not with empty live pages. No catch-all route will manufacture placeholders.
 - A complete route plan is not a promise that content, a service, or an operational system exists.
 
-## 2. Final route tree
+## 2. Current route tree and reservations
 
 Legend: **implemented** means the current application serves the page. Everything
 else is **reserved**, not publicly routable. Dynamic entries require a published
@@ -22,14 +23,15 @@ record; unknown slugs return 404. No additional dynamic detail patterns are need
 for Lab, Infrastructure, Activity, or Architecture in this plan.
 
 ```text
-/                                      implemented: system/home
-├── about                              implemented: engineering identity
-├── work                               implemented: engineering archive
-│   └── [slug]                         implemented: technical case study
-├── journal                            implemented: chronological engineering log
-│   └── [slug]                         implemented: published journal entry
-├── research                           implemented: question-led research archive
-│   └── [slug]                         implemented: published research record
+/                                      implemented: engineering portfolio home
+├── about                              implemented: engineering background and direction
+├── work                               implemented: Projects archive (existing URL)
+│   └── [slug]                         implemented: project detail
+├── writing                            implemented: published writing and ongoing outlines
+├── journal                            implemented: existing engineering-log archive
+│   └── [slug]                         implemented: published engineering log
+├── research                           implemented: existing research-outline index
+│   └── [slug]                         implemented: ongoing research outline
 ├── now                                reserved: canonical current-focus snapshot
 ├── lab                                reserved: systems, inventory, experiments
 ├── infrastructure                     reserved: owned infrastructure documentation
@@ -63,33 +65,38 @@ for Lab, Infrastructure, Activity, or Architecture in this plan.
     └── health                         reserved
 ```
 
-Keep this tree synchronized with the typed manifest. `publicPageHref` accepts only
-implemented, static page keys. Project URLs continue through `projectHref`.
+Keep this tree synchronized with the typed manifest. The primary navigation is
+Home, About, Projects, Writing, and Contact; its labels and internal page
+destinations are centralized in `platform-routes.ts`. Contact points to the
+homepage section because no verified contact channel is published. `publicPageHref`
+accepts only implemented, static page keys. Project URLs continue through
+`projectHref`.
 Reservations are not used to generate navigation, sitemaps, endpoint responses,
 or redirects. In particular, `/admin` is not made safe merely by hiding a link.
 
 ## 3. Page contracts and boundaries
 
-| Area                | Primary question and content                                                                     | Canonical owner and connections                                                                                          |
-| ------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
-| Home                | Who is this engineer, what is happening, where can I inspect the work?                           | Curated projections of identity, Now, projects and publications; later separate live panels                              |
-| About               | How do the engineer's background, philosophy, hardware/software interests and direction connect? | Narrative identity with evidence links; never a duplicate résumé or skills scoreboard                                    |
-| Work                | What verified engineering work can I inspect?                                                    | Numbered Project records; structured category/domain filters when enough records exist                                   |
-| Engineering record  | What problem, constraints, design, implementation and reasoning shaped a system?                 | Project owns its case study, diagrams and evidence; links to logs, knowledge and research                                |
-| Journal / entry     | What happened, what failed, what changed, and what was learned?                                  | Dated author-owned entries; project relationships and references to reusable explanations                                |
-| Research / document | What question is being investigated, and what do sources support?                                | Research question, method, sources, assumptions, analysis, uncertainty and findings; distinguish hypotheses from results |
-| Now                 | What is being built, learned, researched, experimented with, operated, and considered next?      | One current editorial snapshot with an explicit as-of date; homepage consumes it                                         |
-| Lab                 | What experimental systems exist, and what is being tried?                                        | Sanitized inventory and experiment records; clearly distinguish a proposed setup from verified equipment                 |
-| Infrastructure      | How is personally operated infrastructure structured and maintained?                             | Reviewed documentation for actual owned/operated systems; links to architecture and operational lessons                  |
-| Status              | What does current evidence say about public service health?                                      | Sanitized observations and incidents; source, scope and observation time mandatory                                       |
-| Activity            | What changed across the platform?                                                                | Derived events pointing back to their canonical source, with deduplication and provenance                                |
-| Knowledge / topic   | What can a visitor learn and reuse?                                                              | Concept explanation, prerequisites, examples, limitations and references; links back to concrete work                    |
-| Architecture        | How do components and systems relate?                                                            | Reusable diagrams tied to documented owners and revisions; no independent duplicate case studies                         |
-| Contact             | What topics and collaboration fit, and how can someone reach the engineer?                       | Owner-approved public channels; initial static links do not require a form/backend                                       |
-| Profile             | What experience, education and contributions have evidence?                                      | Structured profile claims linked to projects, writing, research and verified external evidence                           |
-| API docs            | What public endpoints exist and what do they return?                                             | Documentation derived from approved implemented contracts; never advertise reserved endpoints as available               |
-| Guestbook           | What moderated public contributions are appropriate?                                             | Separate untrusted-submission workflow, not part of editorial content publication                                        |
-| Ask                 | What can the published knowledge base support an answer to?                                      | Read-only retrieval of approved public revisions with citations, abstention and freshness                                |
+| Area               | Primary question and content                                                                | Canonical owner and connections                                                                             |
+| ------------------ | ------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Home               | Who is this engineer, what work is documented, and where can I inspect it?                  | Direct identity, selected project, engineering approach, current learning, and contact status               |
+| About              | What is the engineer's background, technical focus, and professional direction?             | Narrative profile, clear distinctions between background and current learning, plus the published project   |
+| Projects           | What engineering work can I inspect?                                                        | Numbered Project records; currently one published project                                                   |
+| Engineering record | What problem, constraints, design, implementation and reasoning shaped a system?            | Project owns its case study, diagrams and evidence; links to logs, knowledge and research                   |
+| Writing            | What technical writing is ready, and which notes are still in progress?                     | One published engineering log and six clearly labeled research outlines; existing detail URLs remain stable |
+| Research           | What questions are being investigated, and what has or has not been established?            | Early outlines with scope and limitations; no completed findings are claimed                                |
+| Contact            | How can someone get in touch about relevant work?                                           | Homepage contact section; a verified email or profile is still needed                                       |
+| Now                | What is being built, learned, researched, experimented with, operated, and considered next? | Reserved canonical current-focus snapshot; no separate Now page is implemented                              |
+| Lab                | What experimental systems exist, and what is being tried?                                   | Sanitized inventory and experiment records; clearly distinguish a proposed setup from verified equipment    |
+| Infrastructure     | How is personally operated infrastructure structured and maintained?                        | Reviewed documentation for actual owned/operated systems; links to architecture and operational lessons     |
+| Status             | What does current evidence say about public service health?                                 | Sanitized observations and incidents; source, scope and observation time mandatory                          |
+| Activity           | What changed across the platform?                                                           | Derived events pointing back to their canonical source, with deduplication and provenance                   |
+| Knowledge / topic  | What can a visitor learn and reuse?                                                         | Concept explanation, prerequisites, examples, limitations and references; links back to concrete work       |
+| Architecture       | How do components and systems relate?                                                       | Reusable diagrams tied to documented owners and revisions; no independent duplicate case studies            |
+| Contact            | What topics and collaboration fit, and how can someone reach the engineer?                  | Owner-approved public channels; initial static links do not require a form/backend                          |
+| Profile            | What experience, education and contributions have evidence?                                 | Structured profile claims linked to projects, writing, research and verified external evidence              |
+| API docs           | What public endpoints exist and what do they return?                                        | Documentation derived from approved implemented contracts; never advertise reserved endpoints as available  |
+| Guestbook          | What moderated public contributions are appropriate?                                        | Separate untrusted-submission workflow, not part of editorial content publication                           |
+| Ask                | What can the published knowledge base support an answer to?                                 | Read-only retrieval of approved public revisions with citations, abstention and freshness                   |
 
 About tells the narrative; Profile provides inspectable evidence. Journal is a
 chronological account; Knowledge explains a reusable concept; Research evaluates a
@@ -99,8 +106,10 @@ index of events, not a second source of truth for any of these.
 
 ## 4. Navigation and visitor journeys
 
-Current navigation includes About, Work → `/work`, Journal → `/journal`,
-Research → `/research`, and the remaining homepage anchors.
+Current navigation is Home → `/`, About → `/about`, Projects → `/work`,
+Writing → `/writing`, and Contact → `/#contact`. Journal and research detail
+routes remain available under the Writing section, but are not separate primary
+navigation destinations.
 
 As content is released, organize navigation into predictable groups rather than
 placing 21 links across the header:
@@ -110,9 +119,8 @@ placing 21 links across the header:
 - Systems: Lab, Infrastructure, Status, Activity.
 - Utilities: API docs, Guestbook, Ask; introduce only when usable.
 
-The header can retain a small set of primary destinations, with a later accessible
-site index/command palette for exploration. Neither is implemented now. Work
-continues to mean the archive; avoid a competing `/projects` route.
+The header remains limited to the five primary destinations. Projects continues
+to use the existing `/work` route so current project-detail URLs stay valid.
 
 Example educational journey: engineering record → hardware/firmware architecture
 → specific debugging entry → RS485 or Modbus explanation → back to the project

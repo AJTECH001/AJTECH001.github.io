@@ -599,6 +599,45 @@ figcaption {
   display: grid;
   gap: 1.5rem;
 }
+.home-page .hero {
+  grid-template-columns: minmax(0, 1fr);
+  padding-block: clamp(2.5rem, 6vw, 4rem) 1.5rem;
+}
+.home-page > #projects {
+  padding-top: 2rem;
+}
+.home-page .hero-copy {
+  max-width: 78ch;
+}
+.home-page .hero h1 {
+  max-width: 20ch;
+}
+.approach-list,
+.focus-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.approach-list p,
+.focus-list li {
+  border-bottom: 1px solid var(--border);
+  padding-block: 1rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.focus-list h3 {
+  margin-bottom: 0.5rem;
+  color: var(--foreground);
+  font-size: 1rem;
+}
+.focus-list p {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+.current-focus > .text-link {
+  margin-top: 1rem;
+}
 .record-header {
   grid-column: 1 / -1;
   display: flex;
@@ -770,6 +809,11 @@ figcaption {
   .hero {
     grid-template-columns: 1fr;
     gap: 1.25rem;
+  }
+  .approach-list,
+  .focus-list {
+    grid-template-columns: 1fr;
+    gap: 0;
   }
   .section-heading {
     grid-template-columns: 1fr;

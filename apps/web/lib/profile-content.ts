@@ -6,9 +6,9 @@ export const engineeringProfile: EngineeringProfile = {
   id: "engineering-profile",
   kind: "profile",
   slug: "engineering-profile",
-  title: "Engineering from the physical layer up.",
+  title: "Computer Engineer across software and physical systems.",
   summary:
-    "A Computer Engineer connecting hardware, software, and networks to systems—and working toward the infrastructure behind modern computing.",
+    "Computer Engineer working across software, hardware, networking, and systems, with a growing focus on infrastructure engineering.",
   publication: {
     state: "published",
     visibility: "public",
@@ -37,19 +37,19 @@ export const engineeringProfile: EngineeringProfile = {
       kind: "document",
       locator: "/work/personal-technology-headquarters",
       visibility: "public",
-      note: "Published record of the platform's current implementation and architecture.",
+      note: "Published record of the portfolio's current implementation and architecture.",
     },
   ],
   introduction: [
-    "I approach computing through the relationship between physical machines, the software they execute, and the networks that connect them. A system makes sense when those layers can be examined together.",
-    "My foundation is Computer Engineering. I’m building toward systems and infrastructure engineering, with a longer-term direction in AI infrastructure and data centers in Africa. That direction is a learning trajectory, not a claim that the destination has already been reached.",
+    "I approach computing by looking at how physical machines, software, and networks work together. Understanding those connections helps me make deliberate design decisions and explain how a system behaves.",
+    "I’m developing further toward systems and infrastructure engineering. AI infrastructure and data centers in Africa are longer-term interests, not claims about work I have already operated.",
   ],
   domains: [
     {
       id: "hardware",
       label: "Hardware & embedded",
       description:
-        "The physical layer: electronics, computer hardware, sensors, and the firmware that interfaces with them.",
+        "Computer hardware, electronics, sensors, and embedded systems that connect software to physical devices.",
       state: "Unpublished context",
       connection:
         "Hardware constrains what software can measure, control, and sustain. Power and interfaces belong in the design from the beginning.",
@@ -61,12 +61,12 @@ export const engineeringProfile: EngineeringProfile = {
       id: "software",
       label: "Software & systems",
       description:
-        "Turning a problem into data structures, interfaces, and maintainable behavior.",
+        "Software and backend development, system design, and Rust as a learning interest.",
       state: "Building",
       connection:
         "Software expresses the system's behavior. Clear boundaries make implementation decisions easier to inspect and change.",
       evidenceNote:
-        "Project 001 documents the application structure, typed content, and public interface of this platform. Rust and OpenBoardAnim / Doodler remain separate unpublished source leads; they are not technologies claimed for this project.",
+        "Project 001 documents the application structure, typed content, and public interface of this portfolio. Rust and OpenBoardAnim / Doodler remain separate unpublished source leads; they are not technologies claimed for this project.",
       contentRefs: [
         { kind: "project", id: "personal-technology-headquarters" },
       ],
@@ -75,7 +75,7 @@ export const engineeringProfile: EngineeringProfile = {
       id: "networking",
       label: "Networking & communication",
       description:
-        "The connections between devices: interfaces, protocols, and the movement of information.",
+        "Networking and communication systems, including LoRa, RS485/Modbus, GSM, CCTV, and IT infrastructure.",
       state: "Learning",
       connection:
         "A sensor reading becomes useful only when its path through a wider system is understood, including failures and communication constraints.",
@@ -87,12 +87,12 @@ export const engineeringProfile: EngineeringProfile = {
       id: "infrastructure",
       label: "Infrastructure & operations",
       description:
-        "Bringing systems together through Linux, compute, networking, storage, and operating practices.",
+        "Linux, servers, hardware maintenance, and the systems that support applications and services.",
       state: "Learning",
       connection:
         "An application architecture is a starting point. Operating its supporting infrastructure requires additional knowledge, repeatable procedures, and evidence from real systems.",
       evidenceNote:
-        "The platform's modular-monolith architecture is documented. It is not evidence of a self-hosted deployment, server fleet, cloud environment, or live monitoring system.",
+        "The portfolio's application architecture is documented. It is not evidence of a self-hosted deployment, server fleet, cloud environment, or live monitoring system.",
       contentRefs: [
         { kind: "project", id: "personal-technology-headquarters" },
       ],
@@ -113,7 +113,7 @@ export const engineeringProfile: EngineeringProfile = {
       id: "security",
       label: "Security & protocols",
       description:
-        "Examining trust boundaries, failure modes, and what a system permits—not only what it is intended to do.",
+        "Blockchain protocols, protocol engineering, and security as areas of technical interest.",
       state: "Research",
       connection:
         "Security crosses every layer: physical access, interfaces, network boundaries, application behavior, and operational practice.",

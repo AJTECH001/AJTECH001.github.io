@@ -23,9 +23,16 @@ export const publicRoutes = {
   },
   work: {
     path: "/work",
-    label: "Work",
+    label: "Projects",
     state: "implemented",
     phase: 0,
+    data: "editorial",
+  },
+  writing: {
+    path: "/writing",
+    label: "Writing",
+    state: "implemented",
+    phase: 2,
     data: "editorial",
   },
   project: {
@@ -155,6 +162,39 @@ export const publicRoutes = {
     data: "interactive",
   },
 } as const satisfies Record<string, PublicRoute>;
+
+export const primaryNavigation = {
+  home: {
+    id: "home",
+    label: publicRoutes.home.label,
+    href: publicRoutes.home.path,
+  },
+  about: {
+    id: "about",
+    label: publicRoutes.about.label,
+    href: publicRoutes.about.path,
+  },
+  projects: {
+    id: "projects",
+    label: publicRoutes.work.label,
+    href: publicRoutes.work.path,
+  },
+  writing: {
+    id: "writing",
+    label: publicRoutes.writing.label,
+    href: publicRoutes.writing.path,
+  },
+  contact: {
+    id: "contact",
+    label: "Contact",
+    href: "/#contact",
+  },
+} as const;
+
+export type PrimaryNavigationId = keyof typeof primaryNavigation;
+export function primaryNavigationHref(id: PrimaryNavigationId): string {
+  return primaryNavigation[id].href;
+}
 
 type ImplementedStaticPage = {
   [

@@ -6,7 +6,7 @@ import "./about.css";
 export async function generateMetadata(): Promise<Metadata> {
   const { profile } = await getEngineeringProfile();
   return {
-    title: "Engineering profile — ajtech",
+    title: "About — AJTECH",
     description: profile.summary,
   };
 }

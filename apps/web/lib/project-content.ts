@@ -7,9 +7,9 @@ export const projectRecords: readonly ProjectRecord[] = [
     id: "personal-technology-headquarters",
     slug: "personal-technology-headquarters",
     number: "001",
-    title: "Personal technology headquarters",
+    title: "AJTECH engineering portfolio",
     shortDescription:
-      "A public engineering workspace built as an inspectable record of systems thinking, implementation, and future infrastructure work.",
+      "A Next.js portfolio for presenting engineering work, a technical profile, and writing through structured local content.",
     category: { id: "software", label: "Software" },
     domains: [
       {
@@ -32,28 +32,27 @@ export const projectRecords: readonly ProjectRecord[] = [
     status: "In development",
     year: 2026,
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "pnpm"],
-    scope: "Public platform",
+    scope: "Personal portfolio",
     summary:
-      "An evolving home for my engineering identity, technical writing, research, and future infrastructure lab. Starting with a modular monolith and a public interface built around readable, structured content.",
+      "An in-progress portfolio built with Next.js, React, TypeScript, and typed local content. It documents the current application and its limits; no database or self-hosted infrastructure is connected.",
     overview: [
-      { label: "Architecture", value: "One application · modular monolith" },
+      { label: "Application", value: "Next.js App Router" },
       {
-        label: "Current scope",
-        value:
-          "Public shell, homepage, engineering profile, engineering records",
+        label: "Content",
+        value: "Typed local project, writing, and research records",
       },
-      { label: "Repository checks", value: "Formatting, lint, types, build" },
+      { label: "Status", value: "In development" },
     ],
     sections: {
       context: {
         paragraphs: [
           "The platform itself is an engineering artifact: its architecture, accessibility, content structure, and quality checks are part of the work being documented.",
-          "It grows from a Computer Engineer’s direction toward systems, AI infrastructure, and eventually data-center engineering in Africa. The public interface starts small while preserving room for a technical journal and an operated lab.",
+          "The project presents my Computer Engineering background and the work documented so far. Infrastructure engineering is a future direction, not a capability this portfolio claims to operate.",
         ],
       },
       problem: {
         paragraphs: [
-          "Create one public home for engineering work, research, and future infrastructure documentation. A visitor should be able to inspect the reasoning behind a project, not just see its title and technology list.",
+          "Create a clear professional portfolio that presents documented engineering work without implying that planned infrastructure or incomplete research is already implemented.",
         ],
       },
       requirements: {
@@ -74,7 +73,7 @@ export const projectRecords: readonly ProjectRecord[] = [
       implementation: {
         items: [
           "The shared layout provides navigation, a skip link, the main landmark, and a footer.",
-          "The homepage presents selected work; /work lists published records; /work/[slug] renders their technical documentation.",
+          "The homepage highlights the published project; /work lists projects; /work/[slug] renders its technical documentation.",
           "Static generation prepares the known project route at build time. Unknown records return a not-found response.",
           "CSS tokens define the graphite surfaces, typography, borders, and restrained accent. Diagram and document layouts adapt to narrow screens.",
           "ESLint, TypeScript, Prettier, Husky, and GitHub Actions provide repository quality checks.",
@@ -101,8 +100,8 @@ export const projectRecords: readonly ProjectRecord[] = [
       },
       "current-state": {
         paragraphs: [
-          "The public UI foundation and the first engineering archive are implemented. Project 001 is available as a detailed record, with its homepage preview and archive entry drawn from the same local content.",
-          "The wider platform remains in development. Self-hosting, a database, authentication, and live telemetry are not implemented in this milestone.",
+          "The portfolio, project archive, profile, and local writing and research pages are implemented. Project 001 is the only published project, and its homepage preview and detail page share the same local record.",
+          "The frontend is deployed on Vercel. Self-hosting, a database, authentication, and live telemetry are not implemented.",
         ],
       },
       lessons: {
@@ -171,7 +170,7 @@ export const projectRecords: readonly ProjectRecord[] = [
         {
           id: "routes",
           title: "App Router pages",
-          detail: "Home · /about · /work · /work/[slug]",
+          detail: "Home · /about · /work · /writing · /journal · /research",
         },
         {
           id: "ui",
@@ -189,17 +188,17 @@ export const projectRecords: readonly ProjectRecord[] = [
       {
         phase: "Current",
         description:
-          "Public shell, refined homepage, engineering profile, and educational engineering records.",
+          "A professional portfolio, one documented project, and local writing and research records.",
       },
       {
         phase: "Planned",
         description:
-          "Journal, research collections, and documentation for an engineering lab.",
+          "Additional project records when the work and supporting evidence are ready to publish.",
       },
       {
         phase: "Future",
         description:
-          "Self-hosting, persistent data, and observability connected to real systems. No operational capability is claimed yet.",
+          "Consider database-backed publishing and self-hosting when the content and operational requirements justify them.",
       },
     ],
     links: [],

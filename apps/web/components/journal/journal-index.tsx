@@ -14,12 +14,11 @@ export function JournalIndex({
   return (
     <div className="shell journal-page">
       <header className="journal-intro">
-        <p className="eyebrow accent">Field notes / Engineering log</p>
-        <h1>Engineering journal</h1>
+        <p className="eyebrow accent">Writing / Engineering log</p>
+        <h1>Engineering notes</h1>
         <p>
-          Notes on what I’m building, learning, investigating, and changing.
-          Each entry records its state and links back to the engineering work
-          behind it.
+          Published notes on the implementation, decisions, and debugging behind
+          the portfolio project.
         </p>
         <p className="technical muted journal-count">
           {String(entries.length).padStart(2, "0")} published{" "}

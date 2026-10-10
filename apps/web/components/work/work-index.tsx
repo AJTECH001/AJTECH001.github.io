@@ -13,23 +13,22 @@ export function WorkIndex({
       <nav aria-label="Breadcrumb" className="work-breadcrumb">
         <Link href="/">Home</Link>
         <span aria-hidden="true">/</span>
-        <span aria-current="page">Work</span>
+        <span aria-current="page">Projects</span>
       </nav>
       <header className="work-page-header">
-        <p className="eyebrow accent">Work / Engineering archive</p>
-        <h1>Engineering records.</h1>
+        <p className="eyebrow accent">Projects / Engineering work</p>
+        <h1>Projects</h1>
         <p>
-          An archive for systems, software, hardware, infrastructure,
-          experiments, and research. Each published record documents the
-          problem, architecture, implementation, debugging, and decisions behind
-          the work. Only supported work appears here.
+          A small collection of documented engineering work. Each project page
+          explains its scope, implementation, decisions, and current status
+          using the evidence available.
         </p>
       </header>
       <div className="archive-register">
-        <h2 className="eyebrow">Record index</h2>
+        <h2 className="eyebrow">Project index</h2>
         <p className="technical muted">
           {String(projects.length).padStart(2, "0")}{" "}
-          {projects.length === 1 ? "published record" : "published records"}
+          {projects.length === 1 ? "published project" : "published projects"}
         </p>
       </div>
       <ol role="list" className="archive-list">
@@ -54,7 +53,7 @@ export function WorkIndex({
                 </p>
                 <ProjectMetadata project={project} />
                 <Link className="text-link" href={projectHref(project)}>
-                  Inspect Project {project.number}
+                  View project {project.number}
                   <span aria-hidden="true">→</span>
                 </Link>
               </div>
@@ -63,16 +62,14 @@ export function WorkIndex({
         ))}
       </ol>
       {projects.length === 0 && (
-        <p className="archive-empty">
-          No engineering records have been published yet.
-        </p>
+        <p className="archive-empty">No projects have been published yet.</p>
       )}
       <p className="archive-footnote technical muted">
-        Only documented work is published. A project’s year identifies the
-        recorded work, not its completion.
+        Only documented work is listed. A project’s year identifies the recorded
+        work, not its completion.
       </p>
-      <Link className="text-link" href="/#work">
-        <span aria-hidden="true">←</span> Back to selected work
+      <Link className="text-link" href="/#projects">
+        <span aria-hidden="true">←</span> Back to selected project
       </Link>
     </div>
   );

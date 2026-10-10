@@ -1,186 +1,62 @@
-import { publicPageHref } from "@/lib/platform-routes";
-
-export type SectionId =
-  | "now"
-  | "work"
-  | "infrastructure"
-  | "notes"
-  | "contact"
-  | "journal"
-  | "research";
-export type ContentStatus =
-  "In development" | "Planned" | "Not published" | "Published";
-type NavigationItem = { label: string; id: SectionId | "about"; href: string };
-type FocusArea = {
-  title: string;
-  learning: string;
-  relevance: string;
-  destination: string;
-};
-// Editorial records, not live system state. Add external links only when verified.
 export const siteContent = {
-  name: "ajtech",
-  title: "ajtech — Personal technology headquarters",
+  name: "AJTECH",
+  title: "AJTECH — Computer Engineer | Software & Infrastructure",
   description:
-    "A Computer Engineer’s evolving workspace for systems, infrastructure, research, and the work of building.",
-  navigation: [
-    { label: "About", id: "about", href: publicPageHref("about") },
-    { label: "Now", id: "now", href: "/#now" },
-    { label: "Work", id: "work", href: publicPageHref("work") },
-    { label: "Journal", id: "journal", href: publicPageHref("journal") },
-    { label: "Research", id: "research", href: publicPageHref("research") },
-    { label: "Infrastructure", id: "infrastructure", href: "/#infrastructure" },
-    { label: "Research direction", id: "notes", href: "/#notes" },
-    { label: "Contact", id: "contact", href: "/#contact" },
-  ] satisfies NavigationItem[],
+    "The engineering portfolio of a Computer Engineer working across software, hardware, and systems, with a growing focus on infrastructure engineering.",
   identity: {
-    eyebrow: "Personal technology headquarters",
-    heading: "Understanding systems.\nBuilding from the ground up.",
+    eyebrow: "Computer Engineer",
+    heading: "Software, systems, and infrastructure.",
     introduction:
-      "I’m a Computer Engineer moving toward AI infrastructure engineering. My interests span the physical hardware, networks, and software that make computing possible.",
+      "I work across software engineering, backend systems, computer hardware, networking, and embedded systems. My approach is to understand how the parts fit together, make deliberate technical choices, and document what I learn.",
     purpose:
-      "This is where I’m building a record of that work: the projects, the questions, and eventually the systems I operate.",
-    trajectory: ["Engineer", "Builder", "Operator", "Infrastructure architect"],
-    trajectoryLabel: "The direction I’m working toward",
-    overview: {
-      title: "An engineering direction, mapped.",
-      caption: "Learning pathway · not an operational system",
-      layers: [
-        {
-          title: "Computer engineering",
-          detail: "Hardware + software foundations",
-        },
-        {
-          title: "Systems & networks",
-          detail: "Linux · resources · communication",
-        },
-        {
-          title: "Infrastructure",
-          detail: "Compute · cloud · distributed systems",
-        },
-        {
-          title: "AI infrastructure",
-          detail: "The systems behind AI workloads",
-        },
-        {
-          title: "Data-center engineering",
-          detail: "Long-term direction · Africa",
-        },
-      ],
-    },
+      "This portfolio presents the work documented so far and the infrastructure engineering direction I’m building toward.",
   },
   now: {
-    title: "Building the foundation.",
+    title: "Current learning",
     description:
-      "My immediate project is this platform. Alongside it, my learning direction connects systems fundamentals to the infrastructure behind AI.",
+      "Developing a stronger foundation in Linux, networking, compute, and the systems behind reliable infrastructure.",
     focus: [
       {
-        title: "Systems & networks",
-        learning: "Linux, resource management, and how machines communicate.",
+        title: "Linux and systems",
+        learning:
+          "Deepening my understanding of operating systems, services, and resource management.",
         relevance:
-          "Reliable infrastructure starts with understanding the behavior of a single machine and its network.",
-        destination:
-          "A foundation for administering and troubleshooting systems.",
+          "Infrastructure work depends on understanding how individual systems behave.",
+        destination: "Systems and infrastructure engineering.",
       },
       {
-        title: "Compute & infrastructure",
-        learning: "Hardware, cloud infrastructure, and distributed systems.",
+        title: "Networking",
+        learning:
+          "Building on my interest in communication systems and how devices exchange information.",
         relevance:
-          "Compute depends on how resources are connected, allocated, and maintained.",
-        destination:
-          "The knowledge to design and eventually operate a self-hosted lab.",
+          "Networks connect software, hardware, and the services people rely on.",
+        destination: "Reliable connected systems.",
       },
       {
-        title: "AI & data centers",
-        learning: "The infrastructure requirements behind AI workloads.",
+        title: "AI infrastructure",
+        learning:
+          "Investigating the compute, storage, and networks behind AI workloads.",
         relevance:
-          "AI systems depend on physical compute, networking, and the facilities that support them.",
-        destination:
-          "AI infrastructure engineering, with a long-term interest in data centers in Africa.",
+          "AI infrastructure is a direction I am working toward, not an area of claimed operational experience.",
+        destination: "Infrastructure engineering.",
       },
-    ] satisfies FocusArea[],
+    ],
   },
   work: {
-    title: "The platform is the first project.",
+    title: "A documented project",
     description:
-      "A place to inspect engineering decisions as the work takes shape. This is the first documented project; further case studies will follow when there is work to share.",
+      "The portfolio itself is the first project with a published technical record. I’ll add other work as its scope, contribution, and evidence are ready to share.",
     featuredProjectIds: ["personal-technology-headquarters"],
   },
-  infrastructure: {
-    title: "From understanding to operating.",
-    description:
-      "The long-term ambition is a self-hosted engineering lab, with public documentation of the systems I run and the decisions behind them.",
-    status: "Planned" as ContentStatus,
-    notice:
-      "No infrastructure inventory or live operational data is published yet.",
-    architecture: [
-      { title: "Hardware", detail: "Physical resources" },
-      { title: "Network", detail: "Connectivity" },
-      { title: "Compute", detail: "Execution" },
-      { title: "Services", detail: "Applications" },
-      { title: "Observability", detail: "System feedback" },
-    ],
-    architectureCaption:
-      "Conceptual system layers · planned lab, no deployed inventory",
-    stages: [
-      {
-        title: "Document",
-        description: "Record the hardware, networks, and system architecture.",
-      },
-      {
-        title: "Operate",
-        description:
-          "Develop repeatable practices for hosting and maintaining services.",
-      },
-      {
-        title: "Observe",
-        description: "Publish meaningful measurements backed by real systems.",
-      },
-    ],
-    caption: "Intended progression · not a deployed architecture",
-  },
-  notes: {
-    title: "Questions worth investigating.",
-    description:
-      "The engineering journal records documented build work. The research archive records open technical questions and the learning direction behind them.",
-    cycle: [
-      { title: "Learn", detail: "Investigate a question" },
-      { title: "Build", detail: "Put understanding to work" },
-      { title: "Document", detail: "Record decisions & findings" },
-      { title: "Operate", detail: "Learn from real behavior" },
-    ],
-    cycleCaption:
-      "Intended practice · the journal and notebook will connect these stages",
-    collections: [
-      {
-        title: "Research archive",
-        label: "Question / investigate",
-        description:
-          "Question-led investigations into infrastructure, systems, protocols, and the foundations of computing.",
-      },
-    ],
-    status: "Published" as ContentStatus,
-  },
   contact: {
-    title: "Start with a shared technical question.",
+    title: "Professional contact",
     description:
-      "Systems, infrastructure, and the future of computing in Africa are the conversations I want this platform to make possible.",
-    topics: [
-      {
-        title: "Technical exchange",
-        description:
-          "Questions about systems, networks, and infrastructure design.",
-      },
-      {
-        title: "Engineering collaboration",
-        description:
-          "Shared problems, project ideas, and research into computing infrastructure in Africa.",
-      },
-    ],
-    notice: "A public contact channel has not been added yet.",
+      "I’m interested in engineering opportunities, technical collaboration, and conversations about software and infrastructure.",
+    notice:
+      "A verified public email address or professional contact profile has not been added yet.",
   },
   footer: {
-    label: "An engineering workspace, built deliberately.",
-    note: "Static editorial content · no live telemetry",
+    label: "Computer Engineer · Software & Infrastructure",
+    note: "Project and writing content is maintained locally in this repository.",
   },
 };

@@ -5,9 +5,9 @@ import { getProjects } from "@/lib/projects";
 import "./journal.css";
 
 export const metadata: Metadata = {
-  title: "Engineering journal — ajtech",
+  title: "Engineering notes — AJTECH",
   description:
-    "A chronological engineering log documenting the work, investigation, decisions, and lessons behind the platform.",
+    "Published engineering notes documenting implementation, decisions, and lessons from the portfolio project.",
   alternates: { canonical: "/journal" },
 };
 

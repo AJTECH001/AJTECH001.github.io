@@ -4,9 +4,9 @@ import { getProjects } from "@/lib/projects";
 import { getResearchRecords } from "@/lib/research";
 
 export const metadata: Metadata = {
-  title: "Research lab — ajtech",
+  title: "Research topics in progress — AJTECH",
   description:
-    "Question-led investigations into infrastructure, systems, data centers, AI infrastructure, and protocol security.",
+    "Early research outlines into infrastructure, systems, AI infrastructure, Rust, and blockchain protocols. No findings are claimed.",
   alternates: { canonical: "/research" },
 };
 

@@ -6,9 +6,9 @@ export const journalEntries: readonly JournalEntry[] = [
     id: "platform-engineering-notes",
     kind: "journal",
     slug: "building-a-personal-technology-headquarters",
-    title: "Building a personal technology headquarters",
+    title: "Building the AJTECH engineering portfolio",
     summary:
-      "Why this platform is being built as an inspectable engineering system, and what its first implementation has taught me.",
+      "Implementation choices, debugging, and lessons from building the AJTECH engineering portfolio.",
     publication: {
       state: "published",
       visibility: "public",

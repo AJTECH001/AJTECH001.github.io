@@ -127,13 +127,13 @@ export function JournalEntry({
       <nav aria-label="Breadcrumb" className="journal-breadcrumb">
         <Link href="/">Home</Link>
         <span aria-hidden="true">/</span>
-        <Link href="/journal">Journal</Link>
+        <Link href="/journal">Writing</Link>
         <span aria-hidden="true">/</span>
         <span aria-current="page">{entry.title}</span>
       </nav>
       <header className="journal-entry-header">
         <p className="eyebrow accent">
-          Engineering journal{entry.number ? " / Entry " + entry.number : ""}
+          Engineering log{entry.number ? " / Entry " + entry.number : ""}
         </p>
         <div className="journal-entry-meta technical">
           {entry.period && <span>{entry.period}</span>}

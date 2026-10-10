@@ -20,7 +20,7 @@ export async function generateMetadata({
   const record = await getResearchBySlug((await params).slug);
   if (!record) notFound();
   return {
-    title: record.title + " — Research lab — ajtech",
+    title: record.title + " — Research outline — AJTECH",
     description: record.summary,
     alternates: { canonical: researchHref(record) },
   };

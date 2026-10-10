@@ -28,7 +28,7 @@ export function ProjectDetail({
       <nav aria-label="Breadcrumb" className="work-breadcrumb">
         <Link href="/">Home</Link>
         <span aria-hidden="true">/</span>
-        <Link href="/work">Work</Link>
+        <Link href="/work">Projects</Link>
         <span aria-hidden="true">/</span>
         <span aria-current="page">Project {project.number}</span>
       </nav>
@@ -39,7 +39,7 @@ export function ProjectDetail({
         <ProjectMetadata project={project} />
         {!!project.learningOutcomes?.length && (
           <div className="record-learning">
-            <h2>What this record teaches</h2>
+            <h2>Technical highlights</h2>
             <ul className="record-points">
               {project.learningOutcomes.map((item) => (
                 <li key={item}>{item}</li>
@@ -50,7 +50,7 @@ export function ProjectDetail({
       </header>
       <div className="record-document">
         <nav className="record-toc" aria-label="On this page">
-          <p className="eyebrow">In this record</p>
+          <p className="eyebrow">On this project</p>
           <ol role="list">
             {navigation.map((item, index) => (
               <li key={item.id}>
@@ -64,7 +64,7 @@ export function ProjectDetail({
             ))}
           </ol>
           <Link className="text-link" href="/work">
-            <span aria-hidden="true">←</span> All engineering records
+            <span aria-hidden="true">←</span> All projects
           </Link>
         </nav>
         <div className="record-body">
@@ -160,7 +160,7 @@ export function ProjectDetail({
           )}
           <div className="record-end">
             <Link className="text-link" href="/work">
-              <span aria-hidden="true">←</span> Back to engineering records
+              <span aria-hidden="true">←</span> Back to projects
             </Link>
             <a className="text-link" href="#top">
               Back to top <span aria-hidden="true">↑</span>

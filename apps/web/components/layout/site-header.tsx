@@ -1,6 +1,7 @@
 import { siteContent } from "@/lib/site-content";
 import Link from "next/link";
 import { SiteNavigation } from "@/components/layout/site-navigation";
+import { primaryNavigationHref } from "@/lib/platform-routes";
 
 export function SiteHeader() {
   return (
@@ -8,19 +9,16 @@ export function SiteHeader() {
       <div className="shell header-inner">
         <Link
           className="wordmark"
-          href="/"
+          href={primaryNavigationHref("home")}
           aria-label={`${siteContent.name} home`}
         >
           <span className="brand-mark" aria-hidden="true">
-            aj
+            AJ
           </span>
           <span className="brand-identity">
-            <span>
-              {siteContent.name}
-              <span className="wordmark-suffix"> / engineering</span>
-            </span>
+            <span>{siteContent.name}</span>
             <span className="brand-caption">
-              Personal technology headquarters
+              Computer Engineer · Software &amp; Infrastructure
             </span>
           </span>
         </Link>

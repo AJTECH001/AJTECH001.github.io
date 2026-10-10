@@ -13,7 +13,7 @@ export async function generateMetadata({
   const project = await getProjectBySlug((await params).slug);
   if (!project) notFound();
   return {
-    title: `Project ${project.number}: ${project.title} — ajtech`,
+    title: `Project ${project.number}: ${project.title} — AJTECH`,
     description: project.shortDescription,
   };
 }

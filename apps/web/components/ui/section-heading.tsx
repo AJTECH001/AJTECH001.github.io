@@ -1,5 +1,3 @@
-import type { SectionId } from "@/lib/site-content";
-
 export function SectionHeading({
   id,
   index,
@@ -7,7 +5,7 @@ export function SectionHeading({
   title,
   description,
 }: {
-  id: SectionId;
+  id: string;
   index: string;
   label: string;
   title: string;

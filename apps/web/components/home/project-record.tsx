@@ -41,8 +41,8 @@ export function ProjectRecord({ project }: { project: Project }) {
       </div>
       <details className="engineering-record">
         <summary>
-          Inspect the engineering record{" "}
-          <span className="technical">Problem → decisions → lessons</span>
+          See implementation details{" "}
+          <span className="technical">Design · tradeoffs · current state</span>
         </summary>
         <dl className="record-notes">
           {getProjectSections(project)
@@ -67,7 +67,7 @@ export function ProjectRecord({ project }: { project: Project }) {
       </details>
       <div className="col-span-full border-t border-border px-6 py-2">
         <Link className="text-link" href={projectHref(project)}>
-          Read Project {project.number} in full{" "}
+          Read project {project.number} in full{" "}
           <span aria-hidden="true">→</span>
         </Link>
       </div>

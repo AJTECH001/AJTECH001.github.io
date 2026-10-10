@@ -19,7 +19,7 @@ export async function generateMetadata({
   const entry = await getJournalEntryBySlug((await params).slug);
   if (!entry) notFound();
   return {
-    title: entry.title + " — Engineering journal — ajtech",
+    title: entry.title + " — Engineering notes — AJTECH",
     description: entry.summary,
     alternates: { canonical: journalHref(entry) },
   };

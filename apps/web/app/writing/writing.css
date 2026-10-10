@@ -1,0 +1,58 @@
+.writing-page > .journal-breadcrumb {
+  padding-top: 0;
+}
+.writing-section {
+  padding-block: 2rem;
+  border-top: 1px solid var(--border);
+}
+.writing-section > h2 {
+  margin-bottom: 1rem;
+  font-size: clamp(1.35rem, 2.5vw, 1.8rem);
+}
+.writing-section-intro,
+.writing-empty {
+  max-width: 70ch;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.writing-research-list {
+  margin-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.writing-research-list > li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  padding-block: 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+.writing-research-list > li > div {
+  min-width: 0;
+}
+.writing-research-list h3 {
+  margin-top: 0.35rem;
+}
+.writing-research-list h3 a {
+  text-decoration: none;
+}
+.writing-research-list h3 a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+.writing-research-list > li > div > p:last-child {
+  max-width: 72ch;
+  margin-top: 0.4rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+.writing-research-list .text-link {
+  flex-shrink: 0;
+}
+@media (max-width: 600px) {
+  .writing-research-list > li {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+}
