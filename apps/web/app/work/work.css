@@ -70,17 +70,21 @@
   margin-top: 0.6rem;
   font-weight: 400;
 }
-.archive-content h2 {
+.archive-content h2,
+.archive-content h3 {
   font-size: clamp(1.5rem, 2.8vw, 2.15rem);
 }
-.archive-content h2 a {
+.archive-content h2 a,
+.archive-content h3 a {
   text-decoration: none;
 }
-.archive-content h2 a:hover {
+.archive-content h2 a:hover,
+.archive-content h3 a:hover {
   color: var(--accent);
   text-decoration: underline;
 }
-.archive-content h2 a > span {
+.archive-content h2 a > span,
+.archive-content h3 a > span {
   font-size: 1rem;
   color: var(--accent);
 }
@@ -90,10 +94,13 @@
   color: var(--muted);
 }
 .work-metadata {
-  display: grid;
-  grid-template-columns: max-content 1fr max-content minmax(0, 2fr);
-  gap: 1rem 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2.25rem;
   margin-block: 1.5rem;
+}
+.work-metadata-wide {
+  flex: 1 1 16rem;
 }
 .work-metadata > div {
   min-width: 0;
@@ -495,5 +502,83 @@
   .debugging-case dl > div {
     grid-template-columns: 1fr;
     gap: 0.4rem;
+  }
+}
+
+/* Security project index and records. */
+.area-jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+}
+.area-jump a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 44px;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border);
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: border-color 150ms;
+}
+.area-jump a:hover {
+  border-color: var(--accent);
+}
+.work-area + .work-area {
+  margin-top: 3rem;
+}
+.archive-number {
+  font-size: 0.65rem;
+}
+.archive-brief {
+  display: grid;
+  gap: 0.9rem;
+  margin-top: 1.25rem;
+  max-width: 72ch;
+}
+.archive-brief > div {
+  display: grid;
+  grid-template-columns: 7.5rem minmax(0, 1fr);
+  gap: 1rem;
+}
+.archive-brief dt {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding-top: 0.2rem;
+}
+.archive-brief dd {
+  display: grid;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+}
+.record-overview {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: 0 2rem;
+  margin-top: 1.5rem;
+}
+.record-overview > div {
+  padding-block: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+.record-overview dt {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.record-overview dd {
+  margin-top: 0.25rem;
+  overflow-wrap: anywhere;
+}
+.record-section .findings-summary {
+  margin-bottom: 1.25rem;
+}
+@media (max-width: 760px) {
+  .archive-brief > div {
+    grid-template-columns: 1fr;
+    gap: 0.3rem;
   }
 }

@@ -1,8 +1,10 @@
 import { projectPeriod } from "@/lib/project-records";
+import { getSecurityArea } from "@/lib/security-areas";
 import { StatusLabel } from "@/components/ui/status-label";
 import type { ProjectRecord } from "@/types/project";
 
 export function ProjectMetadata({ project }: { project: ProjectRecord }) {
+  const period = projectPeriod(project);
   return (
     <dl className="work-metadata">
       <div>
@@ -12,17 +14,25 @@ export function ProjectMetadata({ project }: { project: ProjectRecord }) {
         </dd>
       </div>
       <div>
-        <dt>Domain</dt>
-        <dd>{project.domains.map((domain) => domain.label).join(" / ")}</dd>
+        <dt>Area</dt>
+        <dd>{getSecurityArea(project.area).label}</dd>
       </div>
-      {projectPeriod(project) && (
+      <div>
+        <dt>Evidence</dt>
+        <dd>{project.evidence}</dd>
+      </div>
+      {period && (
         <div>
           <dt>Period</dt>
-          <dd>{projectPeriod(project)}</dd>
+          <dd>{period}</dd>
         </div>
       )}
-      <div>
-        <dt>Technologies</dt>
+      <div className="work-metadata-wide">
+        <dt>
+          {project.technologyStatus === "Planned"
+            ? "Planned technologies"
+            : "Technologies"}
+        </dt>
         <dd>
           <ul role="list" className="work-technologies">
             {project.technologies.map((item) => (

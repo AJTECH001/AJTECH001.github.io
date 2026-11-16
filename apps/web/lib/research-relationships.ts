@@ -15,7 +15,7 @@ function references(record: ResearchRecord) {
     })),
     ...(record.relatedProjects ?? []).map((id) => ({
       ref: { kind: "project" as const, id },
-      explanation: "Engineering project connected to this research question.",
+      explanation: "Project record this note draws on.",
     })),
     ...(record.relatedJournal ?? []).map((id) => ({
       ref: { kind: "journal" as const, id },
@@ -23,7 +23,7 @@ function references(record: ResearchRecord) {
     })),
     ...(record.relatedResearch ?? []).map((id) => ({
       ref: { kind: "research" as const, id },
-      explanation: "Related research direction.",
+      explanation: "Related research note.",
     })),
   ] satisfies { ref: ContentRef; explanation: string }[];
 }
@@ -103,7 +103,7 @@ export async function getProjectResearchLinks(
     title: record.number + " — " + record.title,
     href: researchHref(record),
     kind: "research",
-    explanation: "Research question connected to this engineering project.",
+    explanation: "Research note that draws on this work.",
   }));
 }
 
@@ -122,6 +122,6 @@ export async function getJournalResearchLinks(
       title: record.number + " — " + record.title,
       href: researchHref(record),
       kind: "research",
-      explanation: "Research direction connected to this journal entry.",
+      explanation: "Research note connected to this write-up.",
     }));
 }

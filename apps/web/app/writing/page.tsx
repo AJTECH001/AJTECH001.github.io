@@ -1,21 +1,19 @@
 import type { Metadata } from "next";
 import { WritingIndex } from "@/components/writing/writing-index";
-import { getJournalEntries } from "@/lib/journal";
+import { pageMetadata } from "@/lib/metadata";
 import { getResearchRecords } from "@/lib/research";
 import "../journal/journal.css";
 import "./writing.css";
 
-export const metadata: Metadata = {
-  title: "Technical writing — AJTECH",
-  description:
-    "Published engineering notes and clearly labeled research topics in progress.",
-  alternates: { canonical: "/writing" },
-};
+const description =
+  "Smart contract audit reports, an AI agent red-team assessment, and research notes on prompt injection, agent authorization, and Solana program security.";
+
+export const metadata: Metadata = pageMetadata({
+  title: "Writing & Publications",
+  description,
+  path: "/writing",
+});
 
 export default async function WritingPage() {
-  const [entries, research] = await Promise.all([
-    getJournalEntries(),
-    getResearchRecords(),
-  ]);
-  return <WritingIndex entries={entries} research={research} />;
+  return <WritingIndex research={await getResearchRecords()} />;
 }

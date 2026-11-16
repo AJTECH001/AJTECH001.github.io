@@ -1,62 +1,46 @@
+import { professionalContent } from "@/lib/professional-content";
+
+export const siteUrl = "https://ajtech001.github.io";
+
 export const siteContent = {
   name: "AJTECH",
-  title: "AJTECH — Computer Engineer | Software & Infrastructure",
+  url: siteUrl,
+  title: `${professionalContent.fullName} — Security Engineer | Blockchain Security & AI Security Research`,
   description:
-    "The engineering portfolio of a Computer Engineer working across software, hardware, and systems, with a growing focus on infrastructure engineering.",
+    "Security engineer specialising in blockchain security and AI security research: smart contract audits in Solidity and Rust, AI agent red teaming, and application security.",
+  keywords: [
+    "Security Engineer",
+    "Blockchain Security Engineer",
+    "Smart Contract Security Researcher",
+    "Smart Contract Auditor",
+    "AI Security Researcher",
+    "AI Red Teaming",
+    "LLM Security",
+    "Solana Security",
+    "Cybersecurity",
+  ],
   identity: {
-    eyebrow: "Computer Engineer",
-    heading: "Software, systems, and infrastructure.",
-    introduction:
-      "I work across software engineering, backend systems, computer hardware, networking, and embedded systems. My approach is to understand how the parts fit together, make deliberate technical choices, and document what I learn.",
-    purpose:
-      "This portfolio presents the work documented so far and the infrastructure engineering direction I’m building toward.",
-  },
-  now: {
-    title: "Current learning",
-    description:
-      "Developing a stronger foundation in Linux, networking, compute, and the systems behind reliable infrastructure.",
-    focus: [
-      {
-        title: "Linux and systems",
-        learning:
-          "Deepening my understanding of operating systems, services, and resource management.",
-        relevance:
-          "Infrastructure work depends on understanding how individual systems behave.",
-        destination: "Systems and infrastructure engineering.",
-      },
-      {
-        title: "Networking",
-        learning:
-          "Building on my interest in communication systems and how devices exchange information.",
-        relevance:
-          "Networks connect software, hardware, and the services people rely on.",
-        destination: "Reliable connected systems.",
-      },
-      {
-        title: "AI infrastructure",
-        learning:
-          "Investigating the compute, storage, and networks behind AI workloads.",
-        relevance:
-          "AI infrastructure is a direction I am working toward, not an area of claimed operational experience.",
-        destination: "Infrastructure engineering.",
-      },
-    ],
+    eyebrow: professionalContent.positioning,
+    heading: professionalContent.headline,
+    introduction: professionalContent.homeIntroduction,
   },
   work: {
-    title: "A documented project",
+    title: "Selected security work",
     description:
-      "The portfolio itself is the first project with a published technical record. I’ll add other work as its scope, contribution, and evidence are ready to share.",
-    featuredProjectIds: ["personal-technology-headquarters"],
+      "Audits, assessments, and research labs, each with its problem, method, my contribution, and its findings.",
+    featuredProjectIds: [
+      "puppy-raffle-audit",
+      "ai-agent-ctf-assessment",
+      "indirect-prompt-injection-lab",
+    ],
   },
   contact: {
-    title: "Professional contact",
+    title: "Work with me",
     description:
-      "I’m interested in engineering opportunities, technical collaboration, and conversations about software and infrastructure.",
-    notice:
-      "A verified public email address or professional contact profile has not been added yet.",
+      "I’m open to security research collaborations, blockchain and AI security engagements, security engineering roles, and community work.",
   },
   footer: {
-    label: "Computer Engineer · Software & Infrastructure",
-    note: "Project and writing content is maintained locally in this repository.",
+    label: professionalContent.positioning,
+    note: professionalContent.fullName,
   },
 };

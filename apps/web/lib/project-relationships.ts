@@ -1,7 +1,5 @@
 import { isPublishedProject } from "@/lib/project-records";
-import { engineeringProfile } from "@/lib/profile-content";
 import { getProjects, projectHref } from "@/lib/projects";
-import { publicRoutes } from "@/lib/platform-routes";
 import type { ContentRef } from "@/types/content";
 import type { ProjectRecord } from "@/types/project";
 import { getProjectJournalLinks } from "@/lib/journal-relationships";
@@ -20,13 +18,7 @@ export async function getProjectRelationships(
 ): Promise<RelatedContentLink[]> {
   if (!isPublishedProject(project)) return [];
   const projects = await getProjects();
-  const profileIsPublic =
-    engineeringProfile.publication.state === "published" &&
-    engineeringProfile.publication.visibility === "public";
-  const edges = [
-    ...projects.flatMap((record) => record.relationships),
-    ...(profileIsPublic ? engineeringProfile.relationships : []),
-  ];
+  const edges = projects.flatMap((record) => record.relationships);
   const links = new Map<string, RelatedContentLink>();
   for (const edge of edges) {
     const fromHere =
@@ -44,20 +36,6 @@ export async function getProjectRelationships(
           kind: ref.kind,
           explanation: edge.explanation,
         });
-    }
-    if (
-      ref.kind === "profile" &&
-      ref.id === engineeringProfile.id &&
-      profileIsPublic &&
-      publicRoutes.about.state === "implemented"
-    ) {
-      links.set(`profile:${ref.id}`, {
-        id: ref.id,
-        title: "Engineering profile",
-        href: publicRoutes.about.path,
-        kind: ref.kind,
-        explanation: edge.explanation,
-      });
     }
   }
   for (const link of await getProjectJournalLinks(project.id)) {

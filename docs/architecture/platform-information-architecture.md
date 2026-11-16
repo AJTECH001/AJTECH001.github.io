@@ -1,15 +1,22 @@
-# AJTECH engineering portfolio: information architecture
+# AJTECH portfolio: information architecture
+
+> **Update (November 2026):** the portfolio was repositioned around security
+> engineering and research. The current public routes, navigation, and content
+> are described in [the portfolio audit](../portfolio-audit.md) and
+> [the route guide](../../apps/web/app/ROUTES.md). Sections below that describe
+> Project 001/002, the journal, or infrastructure outlines are historical; the
+> reservation and data-contract principles still apply.
 
 Status: the route and data contracts below include future reservations. They are
 not evidence that a backend, authentication, telemetry, database, AI service, or
-self-hosted deployment exists. The public frontend remains on Vercel.
+self-hosted deployment exists. The public frontend is a static export on GitHub Pages.
 
 ## 1. Existing foundation and decisions
 
 - One Next.js App Router application in `apps/web`, within the current pnpm workspace.
 - Root layout owns the skip link, header, main landmark, and footer.
 - `/`, `/about`, `/work`, `/work/[slug]`, `/writing`, `/journal`, `/journal/[slug]`, `/research`, and `/research/[slug]` are implemented.
-- Project 001 is the only published project. One published engineering log and six research outlines are also available as local content.
+- Project 001 documents the portfolio implementation. Project 002 is a published plan for an Infrastructure Engineering Lab, not an operational system. One published engineering log and six research outlines are also available as local content.
 - `getProjects` and `getProjectBySlug` supply typed records to Server Components. The homepage and project archive use the same project record.
 - Preserve the modular monolith, workspace, lockfiles, validation scripts, current layouts and visual tokens.
 - Reserve unfinished routes in `platform-routes.ts`, not with empty live pages. No catch-all route will manufacture placeholders.

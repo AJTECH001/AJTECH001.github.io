@@ -63,6 +63,9 @@ export type TechnicalDocument = ContentIdentity & {
 export type ResearchStatus =
   "Draft" | "Research" | "Ongoing" | "Validated" | "Archived";
 export type ResearchDomain =
+  | "Blockchain Security"
+  | "AI Security"
+  | "Cybersecurity"
   | "Infrastructure"
   | "Systems"
   | "Networking"
@@ -246,27 +249,3 @@ export type PublicObservation<T> =
       reason: "not-connected" | "unavailable";
       value?: never;
     };
-
-/** Profile-specific projection of the shared identity, domain and reference contracts. */
-export type ProfileDomain = Domain & {
-  state:
-    "Building" | "Learning" | "Research" | "Direction" | "Unpublished context";
-  connection: string;
-  evidenceNote: string;
-  contentRefs: ContentRef[];
-};
-export type EngineeringProfile = ContentIdentity & {
-  kind: "profile";
-  introduction: string[];
-  domains: ProfileDomain[];
-  trajectory: {
-    label: string;
-    state: "Background" | "Building" | "Learning" | "Direction";
-    description: string;
-    year?: number;
-    content?: ContentRef;
-  }[];
-  practice: { label: string; description: string }[];
-  future: string;
-  relationships: ContentRelation[];
-};

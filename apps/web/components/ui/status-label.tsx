@@ -7,7 +7,8 @@ export function StatusLabel({ status }: { status: ProjectStatus }) {
       data-active={
         status === "Active" ||
         status === "In development" ||
-        status === "Operational"
+        status === "Operational" ||
+        status === "Completed"
       }
     >
       {status}

@@ -2,6 +2,7 @@ import { siteContent } from "@/lib/site-content";
 import Link from "next/link";
 import { SiteNavigation } from "@/components/layout/site-navigation";
 import { primaryNavigationHref } from "@/lib/platform-routes";
+import { professionalContent } from "@/lib/professional-content";
 
 export function SiteHeader() {
   return (
@@ -18,7 +19,7 @@ export function SiteHeader() {
           <span className="brand-identity">
             <span>{siteContent.name}</span>
             <span className="brand-caption">
-              Computer Engineer · Software &amp; Infrastructure
+              {professionalContent.positioning}
             </span>
           </span>
         </Link>

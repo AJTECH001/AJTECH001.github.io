@@ -1,15 +1,19 @@
 import type { Metadata } from "next";
-import { EngineeringProfile } from "@/components/about/engineering-profile";
-import { getEngineeringProfile } from "@/lib/profile";
+import { SecurityProfile } from "@/components/about/security-profile";
+import { getProjects } from "@/lib/projects";
+import { pageMetadata } from "@/lib/metadata";
 import "./about.css";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const { profile } = await getEngineeringProfile();
-  return {
-    title: "About — AJTECH",
-    description: profile.summary,
-  };
-}
+const description =
+  "About Alade Jamiu Damilola: security engineer focused on smart contract auditing, AI security research and red teaming, and application security.";
+
+export const metadata: Metadata = pageMetadata({
+  title: "About",
+  description,
+  path: "/about",
+  type: "profile",
+});
+
 export default async function AboutPage() {
-  return <EngineeringProfile data={await getEngineeringProfile()} />;
+  return <SecurityProfile projects={await getProjects()} />;
 }

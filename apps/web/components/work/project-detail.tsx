@@ -2,6 +2,8 @@ import Link from "next/link";
 import { ArchitectureDiagram } from "@/components/work/architecture-diagram";
 import { ProjectMetadata } from "@/components/work/project-metadata";
 import { DebuggingRecord } from "@/components/work/debugging-record";
+import { FindingsSummary } from "@/components/security/findings-summary";
+import { getSecurityArea } from "@/lib/security-areas";
 import type { RelatedContentLink } from "@/lib/project-relationships";
 import { getProjectSections } from "@/lib/projects";
 import type { ProjectRecord } from "@/types/project";
@@ -14,13 +16,14 @@ export function ProjectDetail({
   relatedContent: readonly RelatedContentLink[];
 }) {
   const sections = getProjectSections(project);
+  const area = getSecurityArea(project.area);
   const navigation = [
     ...sections.map(({ id, title }) => ({ id, title })),
     ...(project.links.length
       ? [{ id: "references", title: "Links & references" }]
       : []),
     ...(relatedContent.length
-      ? [{ id: "related", title: "Related evidence" }]
+      ? [{ id: "related", title: "Related research" }]
       : []),
   ];
   return (
@@ -30,13 +33,25 @@ export function ProjectDetail({
         <span aria-hidden="true">/</span>
         <Link href="/work">Projects</Link>
         <span aria-hidden="true">/</span>
-        <span aria-current="page">Project {project.number}</span>
+        <Link href={area.path}>{area.label}</Link>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">{project.number}</span>
       </nav>
       <header className="work-page-header record-intro">
-        <p className="eyebrow accent">Project / {project.number}</p>
+        <p className="eyebrow accent">
+          {project.number} / {project.category.label}
+        </p>
         <h1>{project.title}</h1>
         <p>{project.summary}</p>
         <ProjectMetadata project={project} />
+        <dl className="record-overview">
+          {project.overview.map((item) => (
+            <div key={item.label}>
+              <dt>{item.label}</dt>
+              <dd>{item.value}</dd>
+            </div>
+          ))}
+        </dl>
         {!!project.learningOutcomes?.length && (
           <div className="record-learning">
             <h2>Technical highlights</h2>
@@ -50,7 +65,7 @@ export function ProjectDetail({
       </header>
       <div className="record-document">
         <nav className="record-toc" aria-label="On this page">
-          <p className="eyebrow">On this project</p>
+          <p className="eyebrow">On this record</p>
           <ol role="list">
             {navigation.map((item, index) => (
               <li key={item.id}>
@@ -87,6 +102,9 @@ export function ProjectDetail({
                 </span>
                 <h2 id={`${section.id}-heading`}>{section.title}</h2>
               </div>
+              {section.id === "findings" && !!project.findings?.length && (
+                <FindingsSummary findings={project.findings} />
+              )}
               {section.content?.paragraphs
                 ?.filter((text) => text.trim())
                 .map((paragraph) => (
@@ -145,7 +163,7 @@ export function ProjectDetail({
               className="record-section"
               aria-labelledby="related-heading"
             >
-              <h2 id="related-heading">Related evidence</h2>
+              <h2 id="related-heading">Related research</h2>
               <ul role="list">
                 {relatedContent.map((related) => (
                   <li key={related.id}>

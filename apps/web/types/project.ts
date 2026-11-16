@@ -12,14 +12,23 @@ export const projectStatuses = [
   "Active",
   "In development",
   "Operational",
+  "Completed",
   "Paused",
   "Archived",
 ] as const;
 export type ProjectStatus = (typeof projectStatuses)[number];
 export type ProjectCategory = { id: string; label: string };
+/** The three security areas every published record belongs to. */
+export type SecurityAreaId =
+  "blockchain-security" | "ai-security" | "cybersecurity";
+export type FindingSeverity =
+  "Critical" | "High" | "Medium" | "Low" | "Informational";
 export type RecordSectionId =
   | "context"
   | "problem"
+  | "approach"
+  | "contribution"
+  | "findings"
   | "requirements"
   | "architecture"
   | "hardware"
@@ -65,6 +74,17 @@ export type ProjectRecord = {
   title: string;
   shortDescription: string;
   category: ProjectCategory;
+  area: SecurityAreaId;
+  /** Other areas the work provides evidence for (e.g. AppSec classes in an AI assessment). */
+  secondaryAreas?: SecurityAreaId[];
+  /** Where the evidence lives, e.g. "Public report" or "Private report". */
+  evidence: string;
+  /** One sentence describing the owner's personal contribution. */
+  contribution: string;
+  /** Severity counts taken directly from the published or private report. */
+  findings?: { severity: FindingSeverity; count: number }[];
+  /** Short, verifiable outcome shown on cards. */
+  outcome?: string;
   domains: Domain[];
   publication: Publication;
   status: ProjectStatus;
@@ -72,6 +92,7 @@ export type ProjectRecord = {
   year?: number;
   period?: string;
   technologies: string[];
+  technologyStatus?: "Current" | "Planned";
   scope: string;
   summary: string;
   overview: { label: string; value: string }[];
@@ -84,7 +105,7 @@ export type ProjectRecord = {
   links: {
     label: string;
     href: `https://${string}`;
-    kind: "Repository" | "Documentation" | "Reference";
+    kind: "Repository" | "Report" | "Documentation" | "Reference";
   }[];
   relationships: ContentRelation[];
 };

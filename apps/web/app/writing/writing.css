@@ -56,3 +56,12 @@
     gap: 0.35rem;
   }
 }
+.writing-area + .writing-area {
+  margin-top: 2rem;
+}
+.writing-area > .eyebrow {
+  margin-bottom: 0.75rem;
+}
+.writing-availability {
+  margin-top: 0.6rem;
+}

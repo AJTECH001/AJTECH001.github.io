@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import { ResearchIndex } from "@/components/research/research-index";
+import { pageMetadata } from "@/lib/metadata";
 import { getProjects } from "@/lib/projects";
 import { getResearchRecords } from "@/lib/research";
 
-export const metadata: Metadata = {
-  title: "Research topics in progress — AJTECH",
+export const metadata: Metadata = pageMetadata({
+  title: "Security Research Notes",
   description:
-    "Early research outlines into infrastructure, systems, AI infrastructure, Rust, and blockchain protocols. No findings are claimed.",
-  alternates: { canonical: "/research" },
-};
+    "Research notes on AI agent security, indirect prompt injection, smart contract vulnerability classes, and Solana program security.",
+  path: "/research",
+});
 
 export default async function ResearchPage() {
   const [records, projects] = await Promise.all([

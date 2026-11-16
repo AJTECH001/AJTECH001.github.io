@@ -20,16 +20,16 @@ export function ResearchIndex({
   return (
     <div className="shell research-page">
       <header className="research-intro">
-        <p className="eyebrow accent">Writing / Research outlines</p>
-        <h1>Research topics in progress</h1>
+        <p className="eyebrow accent">Writing / Research notes</p>
+        <h1>Security research notes</h1>
         <p>
-          These records set out technical questions and learning scope. They are
-          early outlines: no validated findings, completed studies, or
-          operational experience are claimed.
+          Question-led notes drawn from my audits, assessments, and labs. Each
+          one states its evidence, findings, and limitations.
         </p>
         <p className="technical muted research-count">
-          {String(records.length).padStart(2, "0")} ongoing outlines · no
-          published findings
+          {String(records.length).padStart(2, "0")} research notes ·{" "}
+          {records.filter((record) => record.status === "Validated").length}{" "}
+          validated
         </p>
       </header>
       <div className="research-groups">
@@ -69,12 +69,12 @@ export function ResearchIndex({
                       </ul>
                       {relatedProjects.length > 0 && (
                         <p className="research-related technical">
-                          Related engineering /{" "}
+                          Related work /{" "}
                           {relatedProjects.map((project, index) => (
                             <span key={project.id}>
                               {index > 0 && ", "}
                               <Link href={projectHref(project)}>
-                                Project {project.number}
+                                {project.number}
                               </Link>
                             </span>
                           ))}

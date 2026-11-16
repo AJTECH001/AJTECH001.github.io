@@ -1,13 +1,18 @@
 import Link from "next/link";
-import { journalHref } from "@/lib/journal";
+import { publications } from "@/lib/publications";
 import { researchHref } from "@/lib/research";
-import type { JournalEntry, ResearchRecord } from "@/types/content";
+import { getSecurityArea, securityAreas } from "@/lib/security-areas";
+import type { ResearchRecord } from "@/types/content";
+
+const areaByDomain: Partial<Record<ResearchRecord["domain"], string>> = {
+  "Blockchain Security": "blockchain-security",
+  "AI Security": "ai-security",
+  Cybersecurity: "cybersecurity",
+};
 
 export function WritingIndex({
-  entries,
   research,
 }: {
-  entries: readonly JournalEntry[];
   research: readonly ResearchRecord[];
 }) {
   return (
@@ -18,91 +23,108 @@ export function WritingIndex({
         <span aria-current="page">Writing</span>
       </nav>
       <header className="journal-intro">
-        <p className="eyebrow accent">Writing / Engineering notes</p>
-        <h1>Technical writing</h1>
+        <p className="eyebrow accent">Writing & publications</p>
+        <h1>Security reports and research notes</h1>
         <p>
-          Build notes and question-led investigations, with their publication
-          state made clear. The engineering log documents work already
-          completed; research topics below are early outlines, not finished
-          findings.
+          Audit and assessment reports, and research notes that draw conclusions
+          from them. Every entry links to the project record it comes from.
         </p>
         <p className="technical muted journal-count">
-          {entries.length} published{" "}
-          {entries.length === 1 ? "engineering note" : "engineering notes"} ·{" "}
-          {research.length} ongoing research topics
+          {publications.length} reports ·{" "}
+          {publications.filter((item) => item.availability === "Public").length}{" "}
+          public · {research.length} research notes
         </p>
       </header>
 
-      <section
-        className="writing-section"
-        aria-labelledby="published-writing-heading"
-      >
-        <h2 id="published-writing-heading">Published engineering notes</h2>
-        {entries.length > 0 ? (
-          <ol className="journal-archive">
-            {entries.map((entry) => (
-              <li className="journal-row" key={entry.id}>
-                <div className="journal-marker" aria-hidden="true">
-                  <span />
-                </div>
-                <div className="journal-row-main">
-                  <p className="journal-row-meta technical">
-                    <span>{entry.period ?? "Undated"}</span>
-                    <span>{entry.type}</span>
+      <section className="writing-section" aria-labelledby="reports-heading">
+        <h2 id="reports-heading">Audit and assessment reports</h2>
+        <p className="writing-section-intro">
+          Public reports link to the full document. Private reports are
+          summarised on their project record without exploit payloads or CTF
+          solutions.
+        </p>
+        <ul className="writing-research-list">
+          {publications.map((item) => {
+            const area = getSecurityArea(item.area);
+            return (
+              <li key={item.title}>
+                <div>
+                  <p className="eyebrow">
+                    {item.type} · {area.label} · {item.date}
                   </p>
                   <h3>
-                    <Link href={journalHref(entry)}>{entry.title}</Link>
+                    <a href={item.href}>{item.title}</a>
                   </h3>
-                  <p className="journal-summary">{entry.summary}</p>
-                  <Link className="text-link" href={journalHref(entry)}>
-                    Read the engineering log <span aria-hidden="true">→</span>
-                  </Link>
+                  <p>{item.summary}</p>
+                  <p className="technical muted writing-availability">
+                    {item.availability} ·{" "}
+                    <Link href={`/work/${item.projectSlug}`}>
+                      Project record
+                    </Link>
+                  </p>
                 </div>
+                <a
+                  className="text-link"
+                  href={item.href}
+                  aria-label={`${item.availability === "Public" ? "Open report" : "Read summary"}: ${item.title}`}
+                >
+                  {item.availability === "Public"
+                    ? "Open report"
+                    : "Read summary"}{" "}
+                  <span aria-hidden="true">
+                    {item.availability === "Public" ? "↗" : "→"}
+                  </span>
+                </a>
               </li>
-            ))}
-          </ol>
-        ) : (
-          <p className="writing-empty">
-            No technical writing is published yet.
-          </p>
-        )}
+            );
+          })}
+        </ul>
       </section>
 
       <section
         className="writing-section"
-        aria-labelledby="research-topics-heading"
+        aria-labelledby="research-notes-heading"
       >
-        <h2 id="research-topics-heading">Research topics in progress</h2>
+        <h2 id="research-notes-heading">Research notes</h2>
         <p className="writing-section-intro">
-          These records define questions and learning scope. They do not report
-          validated research, operational experience, or completed outcomes.
+          Each note states its question, evidence, findings, and limitations.
+          Status shows whether the findings are validated or still in progress.
         </p>
-        {research.length > 0 ? (
-          <ul className="writing-research-list">
-            {research.map((record) => (
-              <li key={record.id}>
-                <div>
-                  <p className="eyebrow">{record.domain} · In progress</p>
-                  <h3>
-                    <Link href={researchHref(record)}>{record.title}</Link>
-                  </h3>
-                  <p>{record.summary}</p>
-                </div>
-                <Link
-                  className="text-link"
-                  href={researchHref(record)}
-                  aria-label={`Read the ongoing research outline: ${record.title}`}
-                >
-                  Open outline <span aria-hidden="true">→</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="writing-empty">
-            Research notes will appear here when ready to share.
-          </p>
-        )}
+        {securityAreas.map((area) => {
+          const notes = research.filter(
+            (record) => areaByDomain[record.domain] === area.id,
+          );
+          if (!notes.length) return null;
+          return (
+            <div className="writing-area" key={area.id}>
+              <p className="eyebrow accent">
+                {area.index} / {area.label}
+              </p>
+              <ul className="writing-research-list">
+                {notes.map((record) => (
+                  <li key={record.id}>
+                    <div>
+                      <p className="eyebrow">
+                        {record.number} · {record.status}
+                      </p>
+                      <h3>
+                        <Link href={researchHref(record)}>{record.title}</Link>
+                      </h3>
+                      <p>{record.summary}</p>
+                    </div>
+                    <Link
+                      className="text-link"
+                      href={researchHref(record)}
+                      aria-label={`Read the research note: ${record.title}`}
+                    >
+                      Read note <span aria-hidden="true">→</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          );
+        })}
       </section>
     </div>
   );

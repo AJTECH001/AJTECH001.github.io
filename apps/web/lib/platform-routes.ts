@@ -21,6 +21,27 @@ export const publicRoutes = {
     phase: 1,
     data: "editorial",
   },
+  blockchainSecurity: {
+    path: "/blockchain-security",
+    label: "Blockchain Security",
+    state: "implemented",
+    phase: 0,
+    data: "editorial",
+  },
+  aiSecurity: {
+    path: "/ai-security",
+    label: "AI Security Research",
+    state: "implemented",
+    phase: 0,
+    data: "editorial",
+  },
+  cybersecurity: {
+    path: "/cybersecurity",
+    label: "Cybersecurity",
+    state: "implemented",
+    phase: 0,
+    data: "editorial",
+  },
   work: {
     path: "/work",
     label: "Projects",
@@ -37,23 +58,9 @@ export const publicRoutes = {
   },
   project: {
     path: "/work/[slug]",
-    label: "Engineering record",
+    label: "Project record",
     state: "implemented",
     phase: 0,
-    data: "editorial",
-  },
-  journal: {
-    path: "/journal",
-    label: "Journal",
-    state: "implemented",
-    phase: 2,
-    data: "editorial",
-  },
-  journalEntry: {
-    path: "/journal/[slug]",
-    label: "Journal entry",
-    state: "implemented",
-    phase: 2,
     data: "editorial",
   },
   research: {
@@ -80,13 +87,6 @@ export const publicRoutes = {
   lab: {
     path: "/lab",
     label: "Lab",
-    state: "reserved",
-    phase: 4,
-    data: "editorial",
-  },
-  infrastructure: {
-    path: "/infrastructure",
-    label: "Infrastructure",
     state: "reserved",
     phase: 4,
     data: "editorial",
@@ -163,16 +163,22 @@ export const publicRoutes = {
   },
 } as const satisfies Record<string, PublicRoute>;
 
+// Home is reached through the wordmark; Experience lives at /about#experience.
 export const primaryNavigation = {
-  home: {
-    id: "home",
-    label: publicRoutes.home.label,
-    href: publicRoutes.home.path,
+  blockchainSecurity: {
+    id: "blockchainSecurity",
+    label: "Blockchain",
+    href: publicRoutes.blockchainSecurity.path,
   },
-  about: {
-    id: "about",
-    label: publicRoutes.about.label,
-    href: publicRoutes.about.path,
+  aiSecurity: {
+    id: "aiSecurity",
+    label: "AI Security",
+    href: publicRoutes.aiSecurity.path,
+  },
+  cybersecurity: {
+    id: "cybersecurity",
+    label: "Cybersecurity",
+    href: publicRoutes.cybersecurity.path,
   },
   projects: {
     id: "projects",
@@ -184,6 +190,11 @@ export const primaryNavigation = {
     label: publicRoutes.writing.label,
     href: publicRoutes.writing.path,
   },
+  about: {
+    id: "about",
+    label: publicRoutes.about.label,
+    href: publicRoutes.about.path,
+  },
   contact: {
     id: "contact",
     label: "Contact",
@@ -191,8 +202,13 @@ export const primaryNavigation = {
   },
 } as const;
 
+export const homeHref = publicRoutes.home.path;
+
 export type PrimaryNavigationId = keyof typeof primaryNavigation;
-export function primaryNavigationHref(id: PrimaryNavigationId): string {
+export function primaryNavigationHref(
+  id: PrimaryNavigationId | "home",
+): string {
+  if (id === "home") return homeHref;
   return primaryNavigation[id].href;
 }
 

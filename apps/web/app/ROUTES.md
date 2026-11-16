@@ -1,30 +1,30 @@
 # Route skeleton
 
-The executable routes are `/`, `/about`, `/work`, `/work/[slug]`, `/writing`,
-`/journal`, `/journal/[slug]`, `/research`, and `/research/[slug]`.
-See [the portfolio audit](../../../docs/portfolio-audit.md) for the content
-assessment and the disposition of the retained journal and research routes.
+The executable routes are `/`, `/blockchain-security`, `/ai-security`,
+`/cybersecurity`, `/work`, `/work/[slug]`, `/writing`, `/research`,
+`/research/[slug]`, and `/about`, plus the generated `/sitemap.xml`,
+`/robots.txt`, and `/og.png` (share image).
 
-Primary navigation is Home, About, Projects (`/work`), Writing (`/writing`),
-and Contact (`/#contact`). The journal and research routes remain available for
-their existing records but are grouped under Writing rather than exposed as
-separate primary destinations. Project detail URLs are unchanged.
+Primary navigation is Blockchain, AI Security, Cybersecurity, Projects
+(`/work`), Writing, About, and Contact (`/#contact`); the wordmark links home.
+Experience is the `#experience` section of About. The three area pages share
+`components/security/area-page.tsx` and read their copy from
+`lib/security-areas.ts`. Every project record belongs to exactly one area
+(`area`) and may list `secondaryAreas`.
+
+Research records are published notes with stated evidence, findings, and
+limitations. `/research` remains available, but Writing is the primary
+destination.
+
+The `/journal` routes were retired together with the portfolio build log;
+`/journal` and `/journal/*` redirect to `/writing`. The journal content type
+is retained for future security write-ups. Old infrastructure project and
+research slugs redirect as listed in `next.config.ts`.
 
 The complete reservation manifest is [platform-routes.ts](../lib/platform-routes.ts).
-The route tree, page contracts, component hierarchy, and activation order are in
-[the platform architecture](../../../docs/architecture/platform-information-architecture.md).
-
-Reserved entries deliberately have **no** `page.tsx`, `route.ts`, catch-all handler,
-redirect, or navigation link. They remain unavailable until their feature is approved.
-This includes `/admin` and `/api/*`. A reserved manifest entry is not an
+Reserved entries deliberately have **no** `page.tsx`, `route.ts`, catch-all
+handler, redirect, or navigation link. A reserved manifest entry is not an
 access-control mechanism or a declaration that a system exists.
 
-When activating a feature, add its explicit App Router files here, validate the
-page contract, and then update the manifest. Never generate pages automatically
-from reservations. Keep the root layout and existing Work layout in place.
-
-Writing combines one published engineering log with six clearly labeled
-research outlines in progress. The outlines contain questions and learning
-scope, not findings. Draft and reserved future relationship targets are not
-exposed as public pages or links. Knowledge contracts exist, but the Knowledge
-routes remain reserved.
+See [the portfolio audit](../../../docs/portfolio-audit.md) for the
+repositioning record and evidence register.

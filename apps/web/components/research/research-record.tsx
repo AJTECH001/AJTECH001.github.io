@@ -129,14 +129,14 @@ export function ResearchRecord({
       <nav aria-label="Breadcrumb" className="journal-breadcrumb">
         <Link href="/">Home</Link>
         <span aria-hidden="true">/</span>
-        <Link href="/research">Research topics</Link>
+        <Link href="/writing">Writing</Link>
         <span aria-hidden="true">/</span>
         <span aria-current="page">
           {record.number} · {record.title}
         </span>
       </nav>
       <header className="journal-entry-header research-entry-header">
-        <p className="eyebrow accent">Research outline / {record.number}</p>
+        <p className="eyebrow accent">Research note / {record.number}</p>
         <div className="journal-entry-meta technical">
           <span>Domain / {record.domain}</span>
           <span>Status / {record.status}</span>
@@ -151,14 +151,14 @@ export function ResearchRecord({
         </ul>
         {!!record.technologies?.length && (
           <p className="journal-technologies">
-            <span className="technical muted">Technologies under study / </span>
+            <span className="technical muted">Technologies / </span>
             {record.technologies.join(" · ")}
           </p>
         )}
       </header>
       <div className="journal-document research-document">
         <nav aria-label="On this research record" className="journal-toc">
-          <p className="eyebrow">Notebook index</p>
+          <p className="eyebrow">In this note</p>
           <ol>
             {visibleSections.map(([id, title], index) => (
               <li key={id}>

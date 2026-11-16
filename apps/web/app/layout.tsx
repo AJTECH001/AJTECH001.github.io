@@ -1,9 +1,11 @@
+import { ogImage } from "@/lib/metadata";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { siteContent } from "@/lib/site-content";
+import { professionalContent } from "@/lib/professional-content";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,8 +18,32 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: siteContent.title,
+  metadataBase: new URL(siteContent.url),
+  title: {
+    default: siteContent.title,
+    template: `%s — ${professionalContent.fullName}`,
+  },
   description: siteContent.description,
+  keywords: siteContent.keywords,
+  authors: [{ name: professionalContent.fullName, url: siteContent.url }],
+  creator: professionalContent.fullName,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    siteName: `${siteContent.name} · ${professionalContent.fullName}`,
+    title: siteContent.title,
+    description: siteContent.description,
+    url: "/",
+    locale: "en",
+    images: [ogImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteContent.title,
+    description: siteContent.description,
+    creator: "@Aj_Tech_01",
+    images: [ogImage.url],
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

@@ -12,10 +12,14 @@ export function projectPeriod(project: ProjectRecord): string | undefined {
     (project.year === undefined ? undefined : String(project.year))
   );
 }
+// Insertion order is the reading order on a project page.
 const sectionLabels: Record<RecordSectionId, string> = {
   context: "Context",
-  problem: "Problem",
+  problem: "Problem investigated",
   requirements: "Requirements",
+  approach: "Technical approach",
+  contribution: "My contribution",
+  findings: "Findings",
   architecture: "Architecture",
   hardware: "Hardware",
   software: "Software",
@@ -28,8 +32,8 @@ const sectionLabels: Record<RecordSectionId, string> = {
   security: "Security",
   operations: "Operations",
   result: "Result",
-  "current-state": "Current state",
   lessons: "Lessons",
+  "current-state": "Current state",
 };
 export function getProjectSections(project: ProjectRecord) {
   return (Object.entries(sectionLabels) as [RecordSectionId, string][]).flatMap(

@@ -1,465 +1,333 @@
 import type { ResearchRecord } from "@/types/content";
 
-const profileEvidence = (id: string, note: string) => ({
+const projectEvidence = (id: string, slug: string, note: string) => ({
   id,
   kind: "document" as const,
-  locator: "/about",
+  locator: `/work/${slug}`,
   visibility: "public" as const,
   note,
 });
 
-const projectEvidence = {
-  id: "project-001-record",
-  kind: "document" as const,
-  locator: "/work/personal-technology-headquarters",
-  visibility: "public" as const,
-  note: "Project 001 describes the current application and explicitly separates implemented, planned, and future capabilities.",
-};
-
-const journalEvidence = {
-  id: "platform-engineering-notes",
-  kind: "document" as const,
-  locator: "/journal/building-a-personal-technology-headquarters",
-  visibility: "public" as const,
-  note: "The engineering journal records the platform's current application architecture and states that self-hosting and live operations are not implemented.",
-};
-
+// Research notes synthesise the owner's own audits, assessments, and labs.
+// Findings are limited to what those records demonstrate.
 export const researchRecords: readonly ResearchRecord[] = [
   {
-    id: "infrastructure-engineering",
+    id: "agent-guardrails-are-not-authorization",
     kind: "research",
-    slug: "infrastructure-engineering",
+    slug: "agent-guardrails-are-not-authorization",
     number: "R-001",
-    title: "Infrastructure engineering",
+    title: "Agent guardrails are not authorization",
     summary:
-      "A learning investigation into the responsibilities that connect operating systems, networks, compute, and reliable service operation.",
+      "What six AI-agent challenges show about where security controls belong when an LLM is given tools.",
     publication: {
       state: "published",
       visibility: "public",
-      publishedAt: "2026-09-27",
+      publishedAt: "2026-11-16",
     },
-    updatedAt: "2026-09-27",
+    updatedAt: "2026-11-16",
     revision: "1",
-    domainIds: ["infrastructure", "systems", "networking"],
+    domainIds: ["ai-security"],
     evidence: [
-      profileEvidence(
-        "profile-infrastructure-direction",
-        "The Engineering Profile describes Linux, compute, networking, and infrastructure as an active learning direction.",
+      projectEvidence(
+        "ai-agent-assessment-record",
+        "ai-agent-red-team-assessment",
+        "A-01 summarises the six-challenge assessment, its severity ratings, and the OWASP LLM and CWE mapping.",
+      ),
+    ],
+    status: "Validated",
+    domain: "AI Security",
+    period: "November 2026",
+    topics: ["AI agents", "MCP", "Tool abuse", "Authorization", "OWASP LLM"],
+    technologies: ["LLM agents", "MCP"],
+    question:
+      "When an LLM agent can call privileged tools, does the security boundary hold if the model is persuaded to misbehave?",
+    context:
+      "The ARKX AI Agent CTF exposes purpose-built LLM agents through tools that guard a protected secret. I assessed six challenges across the Advanced and Expert tracks and solved five.",
+    findings: [
+      "In five of the six challenges, a tool performed a privileged or dangerous operation, such as evaluating code, deserializing YAML, unlocking a resource, writing privilege state, or accepting a price, while trusting the model or the caller to act as gatekeeper.",
+      "Disabling the front-end agent did not protect the MCP server behind it: its tool and resource had no function-level authorization of their own.",
+      "Multi-agent systems inherit confused-deputy risk. A low-privilege worker could write a record that a privileged worker trusted without verification.",
+      "Model-level guardrails did slow one attack: they blocked the character-level queries needed to extract a secret through a side channel, even though the side channel itself was confirmed.",
+    ],
+    implications: [
+      "Every tool call should authenticate the principal and validate its inputs in the backend, independently of the model.",
+      "Treat MCP servers as APIs with their own attack surface, not as implementation details of an agent.",
+      "Data shared between agents needs provenance and integrity checks; self-asserted status fields are attacker-controlled.",
+    ],
+    limitations: [
+      "CTF targets are purpose-built to be vulnerable, so these observations show failure modes, not how common they are in production systems.",
+      "Flags and step-by-step solutions are withheld.",
+    ],
+    currentState:
+      "Findings validated against the platform for five of six challenges. A longer write-up is planned.",
+    relationships: [
+      {
+        id: "r001-a01",
+        from: {
+          kind: "research",
+          id: "agent-guardrails-are-not-authorization",
+        },
+        to: { kind: "project", id: "ai-agent-ctf-assessment" },
+        predicate: "explains",
+        explanation:
+          "This note draws its cross-cutting conclusions from the A-01 assessment.",
+        evidenceIds: ["ai-agent-assessment-record"],
+      },
+    ],
+    relatedProjects: ["ai-redteam-skills"],
+    relatedResearch: ["indirect-prompt-injection-defence-in-depth"],
+  },
+  {
+    id: "indirect-prompt-injection-defence-in-depth",
+    kind: "research",
+    slug: "indirect-prompt-injection-defence-in-depth",
+    number: "R-002",
+    title: "Indirect prompt injection needs defence in depth",
+    summary:
+      "Why detecting injected instructions is not enough, and why the agent's own memory is a trust boundary.",
+    publication: {
+      state: "published",
+      visibility: "public",
+      publishedAt: "2026-11-16",
+    },
+    updatedAt: "2026-11-16",
+    revision: "1",
+    domainIds: ["ai-security"],
+    evidence: [
+      projectEvidence(
+        "ipi-lab-record",
+        "indirect-prompt-injection-lab",
+        "A-03 describes the lab, its two defensive layers, and the 26 tests that pin each result.",
       ),
     ],
     status: "Ongoing",
-    domain: "Infrastructure",
-    topics: ["Linux", "Networking", "Reliability", "Operations", "Automation"],
-    technologies: ["Linux"],
+    domain: "AI Security",
+    period: "2026",
+    topics: [
+      "Prompt injection",
+      "RAG poisoning",
+      "Stored injection",
+      "Least privilege",
+    ],
+    technologies: ["Python", "RAG"],
     question:
-      "What knowledge and operating practices connect a system's design to its reliable day-to-day operation?",
+      "Which defences still hold once an injected instruction has reached a tool-using agent's context?",
     context:
-      "The Engineering Profile identifies systems and infrastructure as a learning trajectory. The published work currently documents a web application and its content architecture; it does not document production infrastructure operation.",
-    motivation:
-      "Understanding the foundations of infrastructure is part of the stated direction toward systems and AI infrastructure engineering.",
-    concepts: [
-      "Linux system fundamentals",
-      "Servers and resource management",
-      "Network communication",
-      "Reliability and failure handling",
-      "Monitoring, automation, and operational ownership",
-    ],
-    investigation: [
-      "Build a source-backed understanding of the responsibilities and boundaries in each area.",
-      "Separate general infrastructure concepts from evidence of operating a specific system.",
-      "Connect future hands-on work to a dated engineering record before treating it as operational experience.",
-    ],
-    openQuestions: [
-      "Which Linux administration fundamentals should be demonstrated through a bounded, documented exercise?",
-      "How should reliability and monitoring be evaluated for a small self-hosted service?",
-    ],
-    limitations: [
-      "This entry describes a learning investigation, not production operations or completed research.",
-      "No server inventory, deployment, monitoring data, or reliability measurements are documented.",
-    ],
-    currentState:
-      "Ongoing learning direction. No final conclusion or operational result has been established.",
-    relationships: [
+      "I built an offline lab with a toy agent, labelled benign payloads, a detector, a tool policy gate, a RAG pipeline, and a writable memory store, so each attack and defence can be run and tested in isolation.",
+    experiments: [
       {
-        id: "research-infrastructure-self-hosting",
-        from: { kind: "research", id: "infrastructure-engineering" },
-        to: { kind: "research", id: "self-hosted-infrastructure" },
-        predicate: "related-to",
-        explanation:
-          "Self-hosting is a bounded question within the broader study of infrastructure engineering.",
-        evidenceIds: ["profile-infrastructure-direction"],
+        hypothesis:
+          "A content detector is sufficient to stop indirect prompt injection.",
+        method:
+          "Run a stealth payload designed to evade the detector through the full retrieve, scan, decide, and act pipeline.",
+        observation:
+          "The payload passed the detector. The least-privilege policy gate still blocked the consequential action.",
+        conclusion:
+          "Detection reduces exposure, but containment has to come from limiting what the agent can do.",
+      },
+      {
+        hypothesis: "Content from a trusted internal source is safe to reuse.",
+        method:
+          "Store a note derived from an attacker-supplied ticket, then retrieve it on a later, unrelated query.",
+        observation:
+          "The note was tagged as internal and trusted, and the injection fired on the second turn.",
+        conclusion:
+          "Writes are a trust boundary. Scan on write and quarantine derived content; re-scanning on read is the backstop.",
       },
     ],
-    relatedResearch: ["self-hosted-infrastructure"],
+    findings: [
+      "Keyword stuffing was enough to pull a poisoned document into retrieved context in a naive RAG pipeline.",
+      "Trust-by-source checks at read time miss provenance laundering through the agent's own memory.",
+    ],
+    openQuestions: [
+      "How do these defences behave against a real model rather than a deterministic toy agent?",
+      "How can tool risk classification be derived automatically from a tool's schema and side effects?",
+    ],
+    limitations: [
+      "The lab uses an in-memory agent with no real model or network, so results describe mechanisms, not model-specific rates.",
+    ],
+    currentState:
+      "Lab complete with 26 passing tests. Testing against real models is next.",
+    relationships: [
+      {
+        id: "r002-a03",
+        from: {
+          kind: "research",
+          id: "indirect-prompt-injection-defence-in-depth",
+        },
+        to: { kind: "project", id: "indirect-prompt-injection-lab" },
+        predicate: "documents",
+        explanation: "The experiments in this note run in the A-03 lab.",
+        evidenceIds: ["ipi-lab-record"],
+      },
+    ],
+    relatedResearch: ["agent-guardrails-are-not-authorization"],
   },
   {
-    id: "self-hosted-infrastructure",
+    id: "recurring-smart-contract-vulnerabilities",
     kind: "research",
-    slug: "self-hosted-infrastructure",
-    number: "R-002",
-    title: "Self-hosted infrastructure",
+    slug: "recurring-smart-contract-vulnerability-classes",
+    number: "R-003",
+    title: "Recurring vulnerability classes across three audits",
     summary:
-      "An investigation into the responsibilities involved in owning application infrastructure, grounded in the platform's explicitly planned future direction.",
+      "Patterns from the Puppy Raffle, Snowman Merkle Airdrop, and RustFund reviews: 29 findings, 10 of them high severity.",
     publication: {
       state: "published",
       visibility: "public",
-      publishedAt: "2026-09-27",
+      publishedAt: "2026-11-16",
     },
-    updatedAt: "2026-09-27",
+    updatedAt: "2026-11-16",
     revision: "1",
-    domainIds: ["infrastructure", "software", "systems"],
-    evidence: [projectEvidence, journalEvidence],
-    status: "Research",
-    domain: "Infrastructure",
+    domainIds: ["blockchain-security"],
+    evidence: [
+      projectEvidence(
+        "puppy-raffle-record",
+        "puppy-raffle-audit",
+        "B-01: 4 high, 4 medium, and 8 informational findings.",
+      ),
+      projectEvidence(
+        "snowman-record",
+        "snowman-merkle-airdrop-audit",
+        "B-02: 3 high, 3 medium, and 3 low findings.",
+      ),
+      projectEvidence(
+        "rustfund-record",
+        "rustfund-anchor-audit",
+        "B-03: 3 high findings and 1 medium finding.",
+      ),
+    ],
+    status: "Validated",
+    domain: "Blockchain Security",
+    period: "2026",
     topics: [
-      "Infrastructure ownership",
-      "Linux",
-      "DNS",
-      "Backups",
-      "Operations",
+      "Smart contracts",
+      "Reentrancy",
+      "Access control",
+      "Signatures",
+      "Solana",
     ],
-    technologies: ["Linux", "DNS", "Databases", "Reverse proxies"],
+    technologies: ["Solidity", "Rust", "Anchor"],
     question:
-      "What operational responsibilities would need to be understood before this platform could be self-hosted?",
+      "Which root causes recur across small protocols, regardless of language or chain?",
     context:
-      "Project 001 is a server-rendered Next.js application with typed local content. The project record and journal explicitly state that self-hosting, databases, authentication, and live telemetry are not currently implemented.",
-    motivation:
-      "The platform's long-term direction includes an owned engineering lab. Studying the operational boundary helps keep that plan distinct from the current application.",
-    concepts: [
-      "Linux server administration",
-      "DNS and service routing",
-      "Databases and persistent state",
-      "Reverse proxies and TLS",
-      "Backups, monitoring, deployment, and recovery",
-    ],
-    investigation: [
-      "Map the application dependencies and the operational responsibilities each would introduce.",
-      "Identify what would need to be backed up, monitored, secured, and recovered before proposing an operating design.",
-      "Keep proposed components labeled as topics for investigation until an implementation and its evidence exist.",
-    ],
-    openQuestions: [
-      "Which parts of this application would require persistent state if its editorial content remains local?",
-      "What recovery objective and backup procedure would be appropriate for a first hosted version?",
-      "Which DNS, proxy, and monitoring responsibilities would an owner need to operate?",
+      "These are three time-boxed reviews of training and First Flight codebases, two in Solidity and one in Rust with Anchor.",
+    findings: [
+      "Ordering of external calls and state updates: reentrancy in Puppy Raffle's refund and Snowman's claim, and a checks-effects-interactions violation in RustFund's refund. The bug class carries across languages.",
+      "Missing or weak authorization: unrestricted NFT minting (Snowman) and unrestricted creator withdrawal (RustFund). Both are cases of business rules that exist in the specification but not in the code.",
+      "Unsafe arithmetic and accounting: fee overflow (Puppy Raffle, Snowman) and unrecorded contribution amounts (RustFund).",
+      "Denial of service through assumptions about other actors: winners that cannot receive funds, forced ETH breaking balance checks, and a global purchase timer any user can reset.",
+      "Cryptographic glue: an EIP-712 type hash that does not match the signed struct, and signature malleability.",
     ],
     implications: [
-      "A future infrastructure record should distinguish an intended design from deployed and observed services.",
+      "Start every review by writing down which business rules must hold on-chain, then look for the code that enforces each one.",
     ],
     limitations: [
-      "No server, DNS zone, database, reverse proxy, backup service, monitoring system, or deployment is documented as implemented.",
-      "No hosting choice or operational design has been validated.",
+      "Three small codebases are a small sample; they show recurring patterns, not frequency in production protocols.",
     ],
     currentState:
-      "Research direction connected to Project 001. Infrastructure components remain planned or not yet implemented.",
+      "Updated with each new review. The RustFund report will be published alongside the others.",
     relationships: [
       {
-        id: "research-self-hosting-project-001",
-        from: { kind: "research", id: "self-hosted-infrastructure" },
-        to: { kind: "project", id: "personal-technology-headquarters" },
-        predicate: "investigates",
-        explanation:
-          "The research question concerns future operation of the application documented in Project 001.",
-        evidenceIds: ["project-001-record"],
+        id: "r003-b01",
+        from: {
+          kind: "research",
+          id: "recurring-smart-contract-vulnerabilities",
+        },
+        to: { kind: "project", id: "puppy-raffle-audit" },
+        predicate: "explains",
+        explanation: "Puppy Raffle findings contribute to these patterns.",
+        evidenceIds: ["puppy-raffle-record"],
       },
       {
-        id: "research-self-hosting-journal",
-        from: { kind: "research", id: "self-hosted-infrastructure" },
-        to: { kind: "journal", id: "platform-engineering-notes" },
-        predicate: "related-to",
+        id: "r003-b02",
+        from: {
+          kind: "research",
+          id: "recurring-smart-contract-vulnerabilities",
+        },
+        to: { kind: "project", id: "snowman-airdrop-audit" },
+        predicate: "explains",
         explanation:
-          "The journal records the current platform state and its explicit self-hosting limitations.",
-        evidenceIds: ["platform-engineering-notes"],
+          "Snowman Merkle Airdrop findings contribute to these patterns.",
+        evidenceIds: ["snowman-record"],
       },
-    ],
-    relatedProjects: ["personal-technology-headquarters"],
-    relatedJournal: ["platform-engineering-notes"],
-    relatedResearch: ["infrastructure-engineering"],
-  },
-  {
-    id: "data-center-engineering",
-    kind: "research",
-    slug: "data-center-engineering",
-    number: "R-003",
-    title: "Data center engineering fundamentals",
-    summary:
-      "A long-term learning area focused on how compute, storage, networks, power, cooling, and operations fit together in data centers.",
-    publication: {
-      state: "published",
-      visibility: "public",
-      publishedAt: "2026-09-27",
-    },
-    updatedAt: "2026-09-27",
-    revision: "1",
-    domainIds: ["infrastructure", "data-center", "systems"],
-    evidence: [
-      profileEvidence(
-        "profile-data-center-direction",
-        "The Engineering Profile identifies data-center engineering in Africa as a long-term direction, not an existing facility or credential.",
-      ),
-    ],
-    status: "Research",
-    domain: "Data Center",
-    topics: [
-      "Compute",
-      "Storage",
-      "Networking",
-      "Power",
-      "Cooling",
-      "Reliability",
-    ],
-    question:
-      "How do facility and computing-system constraints combine to shape data-center reliability?",
-    context:
-      "Data-center engineering is identified as a long-term learning and career direction. No data center, facility, or capacity is represented as owned or operated.",
-    motivation:
-      "A useful understanding of computing infrastructure needs to include the physical resources and operational conditions that support compute.",
-    concepts: [
-      "Compute and storage systems",
-      "Network paths and capacity",
-      "Power delivery and redundancy",
-      "Thermal management and cooling",
-      "Monitoring, maintenance, and reliability",
-    ],
-    investigation: [
-      "Study the role and interaction of each facility and computing layer.",
-      "Record assumptions and source references before drawing design conclusions.",
-      "Connect future small-scale practical work to the appropriate research question without equating it to data-center operation.",
-    ],
-    openQuestions: [
-      "Which dependencies create the most important failure paths across power, cooling, compute, and networking?",
-      "How should redundancy claims be evaluated against maintenance and common-cause failures?",
-      "Which operating measurements are needed to reason about capacity and reliability?",
-    ],
-    limitations: [
-      "No facility measurements, capacity figures, redundancy analysis, or data-center operations are documented.",
-      "This record contains a research scope, not a completed technical review.",
-    ],
-    currentState:
-      "Long-term research direction. No findings or data-center operating experience are claimed.",
-    relationships: [
       {
-        id: "research-datacenter-ai-infrastructure",
-        from: { kind: "research", id: "data-center-engineering" },
-        to: { kind: "research", id: "ai-infrastructure" },
-        predicate: "related-to",
-        explanation:
-          "AI infrastructure depends on compute and facility systems that are part of this broader study.",
-        evidenceIds: ["profile-data-center-direction"],
+        id: "r003-b03",
+        from: {
+          kind: "research",
+          id: "recurring-smart-contract-vulnerabilities",
+        },
+        to: { kind: "project", id: "rustfund-audit" },
+        predicate: "explains",
+        explanation: "RustFund findings show the same classes in Rust.",
+        evidenceIds: ["rustfund-record"],
       },
     ],
-    relatedResearch: ["ai-infrastructure"],
+    relatedResearch: ["solana-account-validation"],
   },
   {
-    id: "ai-infrastructure",
+    id: "solana-account-validation",
     kind: "research",
-    slug: "ai-infrastructure",
+    slug: "solana-program-security-account-validation",
     number: "R-004",
-    title: "AI infrastructure",
+    title: "Solana program security starts with account validation",
     summary:
-      "A research direction for understanding the compute, networking, storage, and operations that AI workloads depend on.",
+      "Notes from building and auditing Anchor programs: signer checks, PDA seeds, and the business rules Anchor cannot infer.",
     publication: {
       state: "published",
       visibility: "public",
-      publishedAt: "2026-09-27",
+      publishedAt: "2026-11-16",
     },
-    updatedAt: "2026-09-27",
+    updatedAt: "2026-11-16",
     revision: "1",
-    domainIds: ["ai-infrastructure", "infrastructure", "data-center"],
+    domainIds: ["blockchain-security"],
     evidence: [
-      profileEvidence(
-        "profile-ai-infrastructure-direction",
-        "The Engineering Profile names AI infrastructure as a future direction and explicitly disclaims GPU deployments and facilities.",
+      projectEvidence(
+        "solana-programs-record",
+        "solana-access-control-programs",
+        "B-04 lists the published Anchor programs built around access control.",
+      ),
+      projectEvidence(
+        "rustfund-validation-record",
+        "rustfund-anchor-audit",
+        "B-03 records the authorization and accounting findings in an Anchor program.",
       ),
     ],
-    status: "Research",
-    domain: "AI Infrastructure",
-    topics: [
-      "GPU compute",
-      "Model serving",
-      "Networking",
-      "Storage",
-      "Scheduling",
-      "Capacity planning",
-    ],
+    status: "Ongoing",
+    domain: "Blockchain Security",
+    period: "2026",
+    topics: ["Solana", "Anchor", "PDAs", "Token-2022", "Rust"],
+    technologies: ["Rust", "Anchor", "Token-2022"],
     question:
-      "What infrastructure constraints shape how AI workloads are scheduled, served, and operated?",
+      "Which security properties does Anchor enforce for you, and which must the program author still state explicitly?",
     context:
-      "AI infrastructure is a stated learning and research direction. The profile does not claim GPU cluster operation, model-serving systems, or AI data-center experience.",
-    motivation:
-      "Understanding the systems behind AI workloads connects the current infrastructure learning path to a longer-term engineering direction.",
+      "This note combines my Anchor programs (a transfer-hook whitelist, a vault, and an escrow), the RustFund audit, and the Rektoff × Solana Foundation Rust Security Bootcamp, whose capstone was a security audit of a lending protocol.",
     concepts: [
-      "Compute architecture and accelerators",
-      "Inference and model serving",
-      "Data movement, storage, and networking",
-      "Scheduling and resource allocation",
-      "Observability and capacity economics",
+      "Signer and owner checks on every account an instruction trusts",
+      "PDA derivation from seeds the caller cannot control",
+      "Account constraints as executable statements of the trust model",
+      "Business rules (goals, deadlines, limits) that the framework cannot infer",
     ],
-    investigation: [
-      "Identify the infrastructure concerns each workload introduces before comparing possible architectures.",
-      "Separate general design concepts from measurements that would require access to an implemented system.",
-      "Use sourced examples for capacity or cost discussion; no estimates are published in this record.",
+    findings: [
+      "Anchor account types and constraints remove whole classes of account-confusion bugs, but RustFund's high-severity findings were all business rules that no constraint expressed.",
+      "Transfer hooks move access control into every transfer, so the whitelist account's derivation and authority become part of the token's security.",
     ],
     openQuestions: [
-      "How do inference workload patterns affect compute scheduling and capacity planning?",
-      "Where can storage or network constraints limit accelerator utilization?",
-      "What operational signals are needed to reason about serving reliability and resource use?",
-    ],
-    limitations: [
-      "No GPU cluster, model-serving service, workload benchmark, capacity estimate, or infrastructure cost analysis is documented.",
-      "No experiment or final conclusion has been established.",
+      "How should a review checklist separate framework-enforced checks from author-enforced invariants?",
     ],
     currentState:
-      "Research direction only. This entry does not describe an operated AI system.",
+      "Ongoing. Extended with each Solana program I build or review.",
     relationships: [
       {
-        id: "research-ai-datacenter",
-        from: { kind: "research", id: "ai-infrastructure" },
-        to: { kind: "research", id: "data-center-engineering" },
-        predicate: "depends-on",
+        id: "r004-b04",
+        from: { kind: "research", id: "solana-account-validation" },
+        to: { kind: "project", id: "solana-access-control-programs" },
+        predicate: "documents",
         explanation:
-          "AI infrastructure questions share physical compute, power, cooling, networking, and facility concerns.",
-        evidenceIds: ["profile-ai-infrastructure-direction"],
+          "The programs in B-04 are the builder's side of this note.",
+        evidenceIds: ["solana-programs-record"],
       },
     ],
-    relatedResearch: ["data-center-engineering"],
-  },
-  {
-    id: "systems-programming-rust",
-    kind: "research",
-    slug: "systems-programming-and-rust",
-    number: "R-005",
-    title: "Systems programming and Rust",
-    summary:
-      "A learning investigation into systems programming concepts and how Rust expresses memory safety, concurrency, and low-level control.",
-    publication: {
-      state: "published",
-      visibility: "public",
-      publishedAt: "2026-09-27",
-    },
-    updatedAt: "2026-09-27",
-    revision: "1",
-    domainIds: ["systems", "software", "security"],
-    evidence: [
-      profileEvidence(
-        "profile-rust-learning-lead",
-        "The Engineering Profile identifies Rust as an unpublished learning/source lead, separate from Project 001.",
-      ),
-    ],
-    status: "Research",
-    domain: "Systems",
-    topics: [
-      "Systems programming",
-      "Memory safety",
-      "Concurrency",
-      "Infrastructure",
-    ],
-    technologies: ["Rust"],
-    question:
-      "How do Rust's ownership and type systems shape the way systems software represents memory and concurrency?",
-    context:
-      "Rust is named as a learning area in the supplied profile context. No Rust project, contribution, benchmark, or completed study is documented in the published engineering records.",
-    motivation:
-      "Systems programming offers a way to examine resource ownership and low-level behavior that also matter in infrastructure and protocol software.",
-    concepts: [
-      "Ownership and borrowing",
-      "Lifetimes and memory safety",
-      "Concurrency and shared state",
-      "Systems interfaces and native code",
-      "Reading and tracing existing Rust implementations",
-    ],
-    investigation: [
-      "Study the language concepts through small, source-backed examples.",
-      "Read native Rust code to understand how types and ownership express system boundaries.",
-      "Document a concrete exercise before making claims about implementation experience.",
-    ],
-    openQuestions: [
-      "Which ownership patterns most clearly explain resource lifetime in a systems program?",
-      "How do Rust abstractions interact with operating-system and network interfaces?",
-      "What evidence would show that a small systems exercise behaves as intended?",
-    ],
-    limitations: [
-      "No Rust implementation or test result is included in the published portfolio records.",
-      "This page records a learning direction, not Rust proficiency or a performance claim.",
-    ],
-    currentState:
-      "Research and learning direction. Specific exercises and conclusions remain to be documented.",
-    relationships: [],
-  },
-  {
-    id: "blockchain-protocol-security",
-    kind: "research",
-    slug: "blockchain-protocol-security",
-    number: "R-006",
-    title: "Blockchain protocols and security",
-    summary:
-      "A question-led research area for learning about protocol behavior, smart-contract security, privacy, and distributed systems.",
-    publication: {
-      state: "published",
-      visibility: "public",
-      publishedAt: "2026-09-27",
-    },
-    updatedAt: "2026-09-27",
-    revision: "1",
-    domainIds: ["security", "blockchain", "systems"],
-    evidence: [
-      profileEvidence(
-        "profile-protocol-security-lead",
-        "The Engineering Profile identifies Solana, blockchain security, and protocol engineering as research subjects, while stating that audits and findings are unpublished.",
-      ),
-    ],
-    status: "Research",
-    domain: "Security",
-    topics: [
-      "Protocol engineering",
-      "Smart contracts",
-      "Security",
-      "Privacy",
-      "Distributed systems",
-    ],
-    technologies: ["Rust", "Solana"],
-    question:
-      "How should protocol assumptions and smart-contract behavior be examined before making a security claim?",
-    context:
-      "Solana, blockchain security, protocol engineering, and privacy are supplied areas of interest. The published profile explicitly distinguishes those subjects from audit engagements, findings, and credentials.",
-    motivation:
-      "Security reasoning depends on understanding a protocol's assumptions and behavior, not just its intended use.",
-    concepts: [
-      "Protocol state and trust assumptions",
-      "Smart-contract behavior",
-      "Threat models and failure modes",
-      "Privacy properties and limits",
-      "Distributed-system consistency and liveness",
-    ],
-    investigation: [
-      "Choose a specific protocol question and gather its primary technical sources before drawing conclusions.",
-      "Keep learning exercises, challenge participation, security research, and production work as separate evidence categories.",
-      "Record scope and disclosure constraints before publishing any security observation.",
-    ],
-    openQuestions: [
-      "Which assumptions are required for a selected protocol property to hold?",
-      "How can a security observation be reproduced and scoped without overstating its impact?",
-      "What privacy guarantees does a given system actually provide, and under what assumptions?",
-    ],
-    limitations: [
-      "No security finding, audit, challenge result, protocol implementation, or professional engagement is published here.",
-      "No external protocol references have been attached to this early-stage record.",
-    ],
-    currentState:
-      "Early research direction. A specific protocol, source set, and investigation have not yet been selected.",
-    relationships: [
-      {
-        id: "research-blockchain-rust",
-        from: { kind: "research", id: "blockchain-protocol-security" },
-        to: { kind: "research", id: "systems-programming-rust" },
-        predicate: "related-to",
-        explanation:
-          "Rust is a relevant learning subject for the supplied protocol and security research interests; no implementation connection is claimed.",
-        evidenceIds: [
-          "profile-rust-learning-lead",
-          "profile-protocol-security-lead",
-        ],
-      },
-    ],
-    relatedResearch: ["systems-programming-rust"],
+    relatedProjects: ["rustfund-audit"],
+    relatedResearch: ["recurring-smart-contract-vulnerabilities"],
   },
 ];

@@ -7,6 +7,7 @@ import {
   researchHref,
 } from "@/lib/research";
 import { getResearchRelationships } from "@/lib/research-relationships";
+import { pageMetadata } from "@/lib/metadata";
 
 export async function generateStaticParams() {
   return (await getResearchRecords()).map((record) => ({
@@ -19,11 +20,12 @@ export async function generateMetadata({
 }: PageProps<"/research/[slug]">): Promise<Metadata> {
   const record = await getResearchBySlug((await params).slug);
   if (!record) notFound();
-  return {
-    title: record.title + " — Research outline — AJTECH",
+  return pageMetadata({
+    title: record.title,
     description: record.summary,
-    alternates: { canonical: researchHref(record) },
-  };
+    path: researchHref(record) as `/${string}`,
+    type: "article",
+  });
 }
 
 export default async function ResearchRecordPage({
